@@ -24,9 +24,12 @@ class ChangePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'current_password' => 'required',
-            'new_password' => 'required|string|min:8',
-            'password_confirmation' => 'required|same:new_password'
+            // 'current_password' => 'required',
+            // 'new_password' => 'required|string|min:8',
+            // 'password_confirmation' => 'required|same:new_password'
+            'current_password' => 'required|regex:' . config('const.password_regex'),
+            'new_password' => 'required|string|min:6|regex:' . config('const.password_regex'),
+            'password_confirmation' => 'required|same:new_password|regex:' . config('const.password_regex')
         ];
     }
 
@@ -39,9 +42,12 @@ class ChangePasswordRequest extends FormRequest
     {
         return [
             'current_password.required' => 'Vui lòng nhập mật khẩu hiện tại.',
+            'current_password.regex' => 'Vui lòng nhập mật khẩu ít nhất 6 ký tự bao gồm chữ hoa, chữ thường và ký tự đặc biệt.',
             'new_password.required' => 'Vui lòng nhập mật khẩu mới.',
+            'new_password.regex' => 'Vui lòng nhập mật khẩu ít nhất 6 ký tự bao gồm chữ hoa, chữ thường và ký tự đặc biệt.',
             'password_confirmation.required' => 'Vui lòng nhập xác nhận mật khẩu.',
-            'min' => 'Password phải tối thiểu 8 ký tự.',
+            'password_confirmation.regex' => 'Vui lòng nhập mật khẩu ít nhất 6 ký tự bao gồm chữ hoa, chữ thường và ký tự đặc biệt.',
+            'min' => 'Password phải tối thiểu 6 ký tự.',
             'same' => 'Mật khẩu xác nhận và mật khẩu mới phải khớp nhau.'
         ];
     }

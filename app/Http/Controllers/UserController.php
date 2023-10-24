@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->userServices->getAllUsers();
-        return view('backend.users.index', compact('users'));
+        return view('backend.users.index', compact('users'))->with('i');
     }
     public function create()
     {

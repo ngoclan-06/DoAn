@@ -22,7 +22,7 @@ class SubCategoryController extends Controller
     {
         $categories = $this->subCategoryServices->getAllCategory();
 
-        return view('backend.subcategory.index', compact('categories'));
+        return view('backend.subcategory.index', compact('categories'))->with('i');
     }
 
     public function create()

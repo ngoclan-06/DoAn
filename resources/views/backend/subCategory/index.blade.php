@@ -34,7 +34,7 @@
                                 @php
                                 @endphp
                                 <tr style="text-align: center">
-                                    <td>{{ $category->id }}</td>
+                                    <td>{{ ++$i }}</td>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->slug }}</td>
                                     <td>

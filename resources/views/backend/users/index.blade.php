@@ -36,7 +36,7 @@
                         <tbody>
                             @foreach ($users as $user)
                                 <tr style="text-align: center">
-                                    <td>{{ $user->id }}</td>
+                                    <td>{{ ++$i }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email_address }}</td>
                                     <td>{{ $user->phone }}</td>

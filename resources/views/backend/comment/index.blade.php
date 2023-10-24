@@ -16,19 +16,19 @@
                     <table class="table table-bordered" id="order-dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr style="text-align: center">
-                                <th>S.N.</th>
-                                <th>Author</th>
-                                <th>Blog Name</th>
-                                <th>Message</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th style="width: 100px">Action</th>
+                                <th>STT</th>
+                                <th>Tác giả</th>
+                                <th>Tên tin tức</th>
+                                <th>Tin nhắn</th>
+                                <th>Ngày</th>
+                                <th>Trạng thái</th>
+                                <th style="width: 100px">Lựa chọn</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($comments as $comment)
                                 <tr  style="text-align: center">
-                                    <td>{{ $comment->id }}</td>
+                                    <td>{{ ++$i }}</td>
                                     <td>{{ $comment->user?->name }}</td>
                                     <td>{{ $comment->blog->name }}</td>
                                     <td>{{ $comment->comment }}</td>

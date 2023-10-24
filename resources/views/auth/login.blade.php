@@ -160,19 +160,12 @@
                         <input type="email" name="email_address" required>
                         <label for="">Email</label>
                     </div>
+
                     <div class="inputbox">
                         <ion-icon name="lock-closed-outline"></ion-icon>
                         <input type="password" name="password" required>
                         <label for="">Password</label>
                     </div>
-                    {{-- <div class="forget">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember"
-                                id="remember">
-                            <label class="form-check-label" for="remember">
-                                {{ __('Remember Me') }}
-                            </label>
-                    </div> --}}
                     <button type="submit" name="submit">Login</button>
                     {{ csrf_field() }}
                 </form>
@@ -193,7 +186,7 @@
                     @endif
                 </div>
                 @if (isset($errors))
-                    <p style="color:rgb(72, 0, 255);">
+                    <p style="color:rgb(255, 0, 0); font-size: 8.5px;">
                         @foreach ($errors->all() as $error)
                             {!! $error !!}<br/>
                         @endforeach

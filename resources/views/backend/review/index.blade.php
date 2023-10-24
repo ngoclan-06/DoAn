@@ -9,7 +9,7 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Review Lists</h6>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Danh sách đánh giá</h6>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -17,20 +17,20 @@
         <table class="table table-bordered" id="order-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr style="text-align: center">
-              <th>S.N.</th>
-              <th>Review By</th>
-              <th>Product Title</th>
-              <th>Review</th>
-              <th>Rate</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th style="width: 100px">Action</th>
+              <th>STT</th>
+              <th>Người đánh giá</th>
+              <th>Tên sản phẩm</th>
+              <th>Đánh giá</th>
+              <th>Tỷ lệ</th>
+              <th>Ngày</th>
+              <th>Trạng thái</th>
+              <th style="width: 100px">Lựa chọn</th>
             </tr>
           </thead>
           <tbody>
             @foreach($reviews as $review)
                 <tr style="text-align: center">
-                    <td>{{$review->id}}</td>
+                    <td>{{ ++$i }}</td>
                     <td>{{$review->user?->email_address}}</td>
                     <td>{{$review->products->name}}</td>
                     <td>{{$review->review}}</td>

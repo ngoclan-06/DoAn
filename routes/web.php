@@ -17,6 +17,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\GoogleController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -55,6 +56,10 @@ Route::prefix('auth')->group(function () {
         Route::post('/reset-password', 'reset')->name('password.update');
     });
 });
+
+//Login google
+// Route::get('/google/login', 'GoogleController@redirectToProvider')->name('google.login');
+// Route::get('/google/callback', 'GoogleController@handleProviderCallback');
 
 Route::prefix('admin')->group(function () {
     route::controller(HomeAdminController::class)->middleware('checkLogin')->group(function () {
@@ -157,6 +162,14 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+
+route::controller(FrontendController::class)->group(function () {
+    //socailite
+    route::get('/googleLogin', 'googleLogin')->name('google.login');
+    route::get('/auth/google/callback', 'googleHandle');
+});
+
+
 Route::prefix('user')->group(function () {
     route::controller(FrontendController::class)->group(function () {
         route::get('user-view_login', 'viewLogin')->name('user.view-login');
@@ -198,17 +211,10 @@ Route::prefix('user')->group(function () {
         Route::post('/cart/apply-coupon', 'couponStore')->name('cart.applyCoupon');
         Route::post('/mail/sendcode', 'sendCoupon')->name('mail.sendCoupon');
 
-        //socailite
-        // route::get('/googleLogin', 'googleLogin');
-        // route::get('/auth/google/callback', 'googleHandle'); mới cmt
+        // //socailite
+        // route::get('/googleLogin', 'googleLogin')->name('google.login');
+        // route::get('/auth/google/callback', 'googleHandle'); //mới cmt
     });
-
-   Route::prefix('google')->name('google.')->group( function() {
-        Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
-        Route::any('/auth/google/callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
-   });
-    // route::get('/googleLogin', [FrontendController::class, 'googleLogin']);
-    // route::get('user/auth/google/callback', [FrontendController::class, 'googleHandle']);
 
     route::controller(cartController::class)->middleware('user')->group(function () {
         route::get('cart', 'index')->name('cart');

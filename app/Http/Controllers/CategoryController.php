@@ -20,7 +20,7 @@ class CategoryController extends Controller
     {
         $categories = $this->categoryServices->getAllCategory();
 
-        return view('backend.category.index', compact('categories'));
+        return view('backend.category.index', compact('categories'))->with('i');
     }
 
     public function create()

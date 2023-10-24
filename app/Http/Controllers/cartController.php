@@ -21,7 +21,7 @@ class cartController extends Controller
         $carts = cart::orderBy('id', 'DESC')->paginate(10);
         $category = categories::where('status', 1)->get();
         $wishlists = Wishlist::all();
-        return view('frontend.pages.cart', compact('carts', 'category', 'wishlists'));
+        return view('frontend.pages.cart', compact('carts', 'category', 'wishlists'))->with('i');
     }
 
     public function addToCart(Request $request)

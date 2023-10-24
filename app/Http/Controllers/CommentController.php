@@ -23,7 +23,7 @@ class CommentController extends Controller
     public function index()
     {
         $comments = comments::orderBy('id', 'DESC')->paginate(20);
-        return view('backend.comment.index', compact('comments'));
+        return view('backend.comment.index', compact('comments'))->with('i');
     }
     public function edit($id)
     {

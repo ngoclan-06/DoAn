@@ -209,12 +209,12 @@
                                                 <td>
                                                     <ul style="list-style:none">
                                                         @for ($i = 1; $i <= 5; $i++)
-                                                            @if ($review->rate >= $i)
+                                                            @if ($review->rate >= 5)
                                                                 <li style="float:left;color:#F7941D;"><i
                                                                         class="fa fa-star"></i></li>
-                                                            @else
+                                                            {{-- @else
                                                                 <li style="float:left;color:#F7941D;"><i
-                                                                        class="far fa-star"></i></li>
+                                                                        class="far fa-star"></i></li> --}}
                                                             @endif
                                                         @endfor
                                                     </ul>
@@ -229,7 +229,7 @@
                                                 <td>
                                                     <ul style="list-style:none">
                                                         @for ($i = 1; $i <= 5; $i++)
-                                                            @if ($review->rate >= $i)
+                                                            @if ($review->rate >= 5)
                                                                 <li style="float:left;color:#F7941D;"><i
                                                                         class="fa fa-star"></i></li>
                                                             @else

@@ -19,7 +19,7 @@
                     <table class="table table-bordered" id="banner-dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr style="text-align: center">
-                                <th>S.N.</th>
+                                <th>STT</th>
                                 <th>Tiêu đề</th>
                                 <th>Slug</th>
                                 <th>Ảnh</th>
@@ -31,7 +31,7 @@
                         <tbody>
                             @foreach ($banners as $banner)
                                 <tr style="text-align: center">
-                                    <td>{{ $banner->id }}</td>
+                                    <td>{{ ++$i }}</td>
                                     <td>{{ $banner->title }}</td>
                                     <td>{{ $banner->slug }}</td>
                                     <td>

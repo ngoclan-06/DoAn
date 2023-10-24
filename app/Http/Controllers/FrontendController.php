@@ -41,56 +41,34 @@ class FrontendController extends Controller
 
     public function googleHandle()
     {
+
         try {
             $user = Socialite::driver('google')->user();
-            $findUser = User::where('email_address', $user->email)->first();
-            if(!$findUser)
-            {
-                $findUser = new User();
-                $findUser->name = $user->name;
-                $findUser->email = $user->email;
-                $findUser->picture = $user->avatar;
-                $findUser->password = Hash::make('12345678');
-                $findUser->role = 0;
-                $findUser->save();
-                // auth()->login($findUser, true);
-            }
-            session()->put('id', $findUser->id);
-            session()->put('role', $findUser->role);
-            return redirect()->route('home-user');
-            // dd($user);
-        } catch (Exception $e)
+        } catch (\Exception $e) 
         {
-            // dd($e->getMessage());
-            // return redirect()->route('user.view-login');
+            return redirect('/login');
         }
-        // dd(1);
-//         try {
-//             $user = Socialite::driver('google')->user();
-//             dd($user);
-//         } catch (\Exception $e) {
-//             // dd(2);
-//             return redirect()->route('user.view-login');
-//         }
-// // dd(3);
-//         if (explode("@", $user->email)[1] != 'gmail.com') {
-//             return redirect()->to('/');
-//         }
 
-//         $existUser = User::where('email_address', $user->email)->first();
-//         if ($existUser){
-//             auth()->login($existUser, true);
-//         } else {
-//             $findUser = new User();
-//             $findUser->name = $user->name;
-//             $findUser->email_address = $user->email;
-//             $findUser->image = $user->picture;
-//             $findUser->password = Hash::make('12345678');
-//             $findUser->role = 0;
-//             $findUser->save();
-//             auth()->login($findUser, true);
-//         }
-//         return redirect()->route('home-user');
+        // if (explode('@', $user->email_address)[1] !== 'company.com')
+        // {
+        //     return redirect()->to('/');
+        // }
+
+        $existUser = User::where('email_address', $user->email)->first();
+
+        if ($existUser) {
+            auth()->login($existUser, true);
+        } else {
+            $newUser = new User;
+            $newUser->name = $user->name;
+            $newUser->email_address = $user->email;
+            $newUser->google_id = $user->id;
+            $newUser->image = $user->avatar;
+            $newUser->save();
+
+            auth()->login($newUser, true);
+        }
+        return redirect()->to('/user/view_home');
     }
 
     public function viewLogin()
@@ -172,7 +150,8 @@ class FrontendController extends Controller
 
     public function productList()
     {
-        $products = products::query();
+        $now = now();
+        $products = products::query()->where('expiry', '>', $now);
 
         if (!empty($_GET['category'])) {
             $slug = explode(',', $_GET['category']);
@@ -301,6 +280,8 @@ class FrontendController extends Controller
 
     public function productSearch(Request $request)
     {
+        // $now = now();
+        // ->where('expiry', '>', $now)
         $recent_products = products::where('status', '1')->orderBy('id', 'DESC')->whereNull('deleted_at')->limit(3)->get();
         $products = products::whereNull('deleted_at')->orwhere('name', 'like', '%' . $request->search . '%')
             ->orwhere('description', 'like', '%' . $request->search . '%')

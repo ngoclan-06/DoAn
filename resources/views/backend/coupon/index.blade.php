@@ -18,18 +18,18 @@
         <table class="table table-bordered" id="banner-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr style="text-align: center">
-              <th>S.N.</th>
-              <th>Coupon Code</th>
-              <th>Type</th>
-              <th>Value</th>
-              <th>Status</th>
-              <th style="width: 100px">Action</th>
+              <th>STT</th>
+              <th>Mã giảm giá</th>
+              <th>Kiểu</th>
+              <th>Giá trị</th>
+              <th>Trạng thái</th>
+              <th style="width: 100px">Lựa chọn</th>
             </tr>
           </thead>
           <tbody>
             @foreach($coupons as $coupon)   
                 <tr style="text-align: center">
-                    <td>{{$coupon->id}}</td>
+                    <td>{{ ++$i }}</td>
                     <td>{{$coupon->code}}</td>
                     <td>
                         @if($coupon->type=='fixed')

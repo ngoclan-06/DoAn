@@ -29,7 +29,7 @@
           <tbody>
             @foreach($orders as $order)
                 <tr style="text-align: center">
-                    <td>{{$order->id}}</td>
+                    <td>{{ ++$i }}</td>
                     <td>{{$order->fullname}}</td>
                     <td>{{$order->email}}</td>
                     <td>{{number_format($order->total,0)}}</td>

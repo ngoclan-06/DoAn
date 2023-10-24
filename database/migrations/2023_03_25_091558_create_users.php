@@ -18,9 +18,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email_address');
-            $table->string('address');
-            $table->string('password');
-            $table->string('phone');
+            $table->string('address')->nullable();
+            $table->string('password')->nullable();
+            $table->string('google_id')->nullable();
+            $table->string('phone')->nullable();
             $table->string('image')->nullable();
             $table->string('remember_token')->nullable();
             $table->tinyInteger('role')->default(0);

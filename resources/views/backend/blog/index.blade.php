@@ -30,7 +30,7 @@
                         <tbody>
                             @foreach ($blogs as $blog)
                                 <tr style="text-align: center">
-                                    <td>{{ $blog->id }}</td>
+                                    <td>{{ ++$i }}</td>
                                     <td>{{ $blog->name }}</td>
                                     <td>
                                         @if ($blog->image)

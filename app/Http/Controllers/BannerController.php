@@ -20,7 +20,7 @@ class BannerController extends Controller
     {
         $banners = $this->bannerServices->getAllBanners();
 
-        return view('backend.banner.index', compact('banners'));
+        return view('backend.banner.index', compact('banners'))->with('i');
     }
 
     public function create()

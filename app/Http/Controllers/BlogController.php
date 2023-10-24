@@ -20,7 +20,7 @@ class BlogController extends Controller
     {
         $blogs = $this->blogServices->getAllBlog();
 
-        return view('backend.blog.index', compact('blogs'));
+        return view('backend.blog.index', compact('blogs'))->with('i');
     }
 
     public function create()

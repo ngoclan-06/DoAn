@@ -17,7 +17,7 @@ class messageController extends Controller
     public function index()
     {
         $messages = $this->message->getAllMessage();
-        return view('backend.message.index', compact('messages'));
+        return view('backend.message.index', compact('messages'))->with('i');
     }
     public function store(MessageRequest $messageRequest)
     {

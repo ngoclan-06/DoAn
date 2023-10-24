@@ -25,7 +25,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ $order->id }}</td>
+                            <td>{{ ++$i }}</td>
                             <td>{{ $order->fullname }}</td>
                             <td>{{ $order->email }}</td>
                             <td>{{ $order->phone }}</td>
