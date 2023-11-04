@@ -80,7 +80,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Trending Item</h2>
+                        <h2>Mặt hàng thịnh hàng</h2>
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                                 @endphp
                                 @if ($subcategories)
                                     <button class="btn" style="background:black"data-filter="*">
-                                        All Products
+                                        Sản phẩm
                                     </button>
                                     @foreach ($subcategories as $cat)
                                         <button class="btn"
@@ -134,17 +134,15 @@
                                                                 class=" ti-eye"></i><span>Quick Shop</span></a>
                                                         <a title="Wishlist"
                                                             href="{{ route('add-to-wishlist', $product->id) }}"><i
-                                                                class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                                                class=" ti-heart "></i><span>Thêm vào danh sách yêu thích</span></a>
                                                     </div>
                                                     <div class="product-action-2">
                                                         @if ($product->quantity > 0)
                                                             <a title="Add to cart"
-                                                                href="{{ route('add-to-cart', $product->id) }}">Add to
-                                                                cart</a>
+                                                                href="{{ route('add-to-cart', $product->id) }}">Thêm vào giỏ hàng</a>
                                                         @else
                                                             <a style="pointer-events: none;" title="Add to cart"
-                                                                href="{{ route('add-to-cart', $product->id) }}">Add to
-                                                                cart</a>
+                                                                href="{{ route('add-to-cart', $product->id) }}">Thêm vào giỏ hàng</a>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -176,7 +174,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Hot Item</h2>
+                        <h2>Mục nổi bật</h2>
                     </div>
                 </div>
             </div>
@@ -237,7 +235,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="shop-section-title">
-                                <h1>Latest Items</h1>
+                                <h1>Mục mới nhất</h1>
                             </div>
                         </div>
                     </div>
@@ -289,7 +287,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>From Our Blog</h2>
+                        <h2>Tin tức từ cửa hàng</h2>
                     </div>
                 </div>
             </div>
@@ -318,7 +316,7 @@
     <!-- End Shop Blog  -->
 
     <!-- Start Shop Services Area -->
-    <section class="shop-services section home">
+    {{-- <section class="shop-services section home">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
@@ -359,7 +357,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End Shop Services Area -->
     @include('frontend.layouts.newsletter')
 @endsection

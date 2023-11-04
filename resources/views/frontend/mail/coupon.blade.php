@@ -8,7 +8,7 @@
 </head>
 <body>
     <h3>Congratulations on receiving a discount code when you shop at the store</h3>
-    <h4>Code: {{ $coupon->code }}</h4>
+    <h4>Code: {{ $coupon?->code }}</h4>
     <h3>Thank you very much</h3>
 </body>
 </html>

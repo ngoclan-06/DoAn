@@ -25,7 +25,7 @@
                         <option value="inactive" {{ $comment->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
             </form>
         </div>
     </div>

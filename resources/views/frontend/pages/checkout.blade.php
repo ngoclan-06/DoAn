@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{ route('home-user') }}">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="{{ route('home-user') }}">Trang chủ<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="javascript:void(0)">Checkout</a></li>
                         </ul>
                     </div>
@@ -150,7 +150,7 @@
     </section>
     <!--/ End Checkout -->
     <!-- Start Shop Services Area  -->
-    <section class="shop-services section home">
+    {{-- <section class="shop-services section home">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
@@ -191,7 +191,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End Shop Services -->
 
     <!-- Start Shop Newsletter  -->
@@ -202,7 +202,7 @@
                     <div class="col-lg-8 offset-lg-2 col-12">
                         <!-- Start Newsletter Inner -->
                         <div class="inner">
-                            <h4>Newsletter</h4>
+                            <h4>TIN</h4>
                             <p> Subscribe to our newsletter and get <span>10%</span> off your first purchase</p>
                             <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
                                 <input name="EMAIL" placeholder="Your email address" required="" type="email">

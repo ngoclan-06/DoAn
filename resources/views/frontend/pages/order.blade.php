@@ -8,8 +8,8 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{ 'home-user' }}">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="">Order</a></li>
+                            <li><a href="{{ 'home-user' }}">Trang chủ<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="">Đặt hàng</a></li>
                         </ul>
                     </div>
                 </div>
@@ -28,10 +28,10 @@
                         <table class="table shopping-summery">
                             <thead>
                                 <tr class="main-hading">
-                                    <th>PRODUCT</th>
-                                    <th>NAME</th>
-                                    <th class="text-center">UNIT PRICE</th>
-                                    <th class="text-center">QUANTITY</th>
+                                    <th>SẢN PHẨM</th>
+                                    <th>TÊN</th>
+                                    <th class="text-center">ĐƠN GIÁ</th>
+                                    <th class="text-center">SỐ LƯỢNG</th>
                                 </tr>
                             </thead>
                             <tbody id="cart_item_list">
@@ -98,7 +98,7 @@
     <!--/ End Shopping Cart -->
 
     <!-- Start Shop Services Area  -->
-    <section class="shop-services section">
+    {{-- <section class="shop-services section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
@@ -139,7 +139,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End Shop Newsletter -->
 
     <!-- Start Shop Newsletter  -->

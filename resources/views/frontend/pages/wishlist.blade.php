@@ -8,8 +8,8 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{ 'home-user' }}">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="javascript:void(0);">Wishlist</a></li>
+                            <li><a href="{{ 'home-user' }}">Trang chủ<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="javascript:void(0);">Sản phẩm yêu thích</a></li>
                         </ul>
                     </div>
                 </div>
@@ -27,10 +27,10 @@
                     <table class="table shopping-summery">
                         <thead>
                             <tr class="main-hading">
-                                <th>PRODUCT</th>
-                                <th>NAME</th>
-                                <th class="text-center">TOTAL</th>
-                                <th class="text-center">ADD TO CART</th>
+                                <th>SẢN PHẨM</th>
+                                <th>TÊN</th>
+                                <th class="text-center">TỔNG CỘNG</th>
+                                <th class="text-center">THÊM VÀO GIỎ HÀNG</th>
                                 <th class="text-center"><i class="ti-trash remove-icon"></i></th>
                             </tr>
                         </thead>
@@ -66,7 +66,7 @@
     <!--/ End Shopping Cart -->
 
     <!-- Start Shop Services Area  -->
-    <section class="shop-services section">
+    {{-- <section class="shop-services section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
@@ -107,7 +107,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End Shop Newsletter -->
 
     @include('frontend.layouts.newsletter')
@@ -215,15 +215,6 @@
                                     <a href="#" class="btn min"><i class="ti-heart"></i></a>
                                     <a href="#" class="btn min"><i class="fa fa-compress"></i></a>
                                 </div>
-                                {{-- <div class="default-social">
-                                    <h4 class="share-now">Share:</h4>
-                                    <ul>
-                                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a class="youtube" href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                                        <li><a class="dribbble" href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    </ul>
-                                </div> --}}
                             </div>
                         </div>
                     </div>

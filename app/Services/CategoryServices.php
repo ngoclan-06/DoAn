@@ -21,7 +21,7 @@ class CategoryServices
 
     public function store(Request $request)
     {
-        if ($request->status == 'Active') {
+        if ($request->status == 'Còn bánh') {
             $status = 1;
         } else {
             $status = 0;

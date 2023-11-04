@@ -10,7 +10,7 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{ route('home-user') }}">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="{{ route('home-user') }}">Trang chủ<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="javascript:void(0);">Blog Single Sidebar</a></li>
                         </ul>
                     </div>
@@ -35,7 +35,7 @@
                                     <h2 class="blog-title">{{ $blog->name }}</h2>
                                     <div class="blog-meta">
                                         <span class="author"><a href="javascript:void(0);"><i class="fa fa-user"></i>By
-                                                {{ $blog->user->name }}
+                                                {{ $blog->user->name ?? 'Anonymous' }}
                                             </a><a href="javascript:void(0);"><i
                                                     class="fa fa-calendar"></i>{{ $blog->created_at->format('M d, Y') }}</a><a
                                                 href="javascript:void(0);"></span>

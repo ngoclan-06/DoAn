@@ -10,8 +10,8 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{route('home-user')}}">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="javascript:void(0);">Register</a></li>
+                            <li><a href="{{route('home-user')}}">Trang chủ<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="javascript:void(0);">Đăng ký</a></li>
                         </ul>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
             <div class="row"> 
                 <div class="col-lg-6 offset-lg-3 col-12">
                     <div class="login-form">
-                        <h2>Register</h2>
+                        <h2>Đăng ký</h2>
                         <p>Please register in order to checkout more quickly</p>
                         <!-- Form -->
                         <form class="form" method="post" action="{{route('user.register')}}">

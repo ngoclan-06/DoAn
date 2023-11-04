@@ -25,20 +25,20 @@ class SubCategoryServices
         } else {
             $status = 0;
         }
-        $image = $request->image;
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
+        // $image = $request->image;
+        // if ($request->hasFile('image')) {
+        //     $file = $request->file('image');
+        //     $filename = $file->getClientOriginalName();
+        //     $extension = $file->getClientOriginalExtension();
 
-            if (strcasecmp($extension, 'jpg') || strcasecmp($extension, 'png') || strcasecmp($extension, 'jepg')) {
-                $image = Str::random(5) . "_" . $filename;
-                while (file_exists("image/subcategory/" . $image)) {
-                    $image = Str::random(5) . "_" . $filename;
-                }
-                $file->move('image/subcategory', $image);
-            }
-        }
+        //     if (strcasecmp($extension, 'jpg') || strcasecmp($extension, 'png') || strcasecmp($extension, 'jepg')) {
+        //         $image = Str::random(5) . "_" . $filename;
+        //         while (file_exists("image/subcategory/" . $image)) {
+        //             $image = Str::random(5) . "_" . $filename;
+        //         }
+        //         $file->move('image/subcategory', $image);
+        //     }
+        // }
         try {
             DB::beginTransaction();
 
@@ -46,7 +46,7 @@ class SubCategoryServices
                 'name' => $request->name,
                 'slug' => Str::slug($request->name),
                 'status' => $status,
-                'image' => $image,
+                // 'image' => $image,
                 'categories_id' => $request->parent_category,
             ]);
             DB::commit();
@@ -91,7 +91,7 @@ class SubCategoryServices
                 'slug' => Str::slug($request->name),
                 'status' => $status,
                 'image' => $image,
-                'parent_category' => $request->parent_category,
+                'categories_id' => $request->categories_id,
             ]);
 
             DB::commit();

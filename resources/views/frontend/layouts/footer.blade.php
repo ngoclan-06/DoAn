@@ -63,7 +63,7 @@
         </div>
     </div>
     <!-- End Footer Top -->
-    <div class="copyright">
+    {{-- <div class="copyright">
         <div class="container">
             <div class="inner">
                 <div class="row">
@@ -81,7 +81,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </footer>
 <!-- /End Footer Area -->
 

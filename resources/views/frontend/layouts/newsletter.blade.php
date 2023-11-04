@@ -6,12 +6,12 @@
                 <div class="col-lg-8 offset-lg-2 col-12">
                     <!-- Start Newsletter Inner -->
                     <div class="inner">
-                        <h4>Newsletter</h4>
-                        <p> Sign up for our newsletter and get a discount code for your first purchase</p>
+                        <h4>TIN</h4>
+                        <p> Đăng ký nhận bản tin của chúng tôi và nhận mã giảm giá cho lần mua hàng đầu tiên của bạn</p>
                         <form action="{{ route('mail.sendCoupon') }}" method="post" class="newsletter-inner">
                             @csrf
-                            <input name="email" placeholder="Your email address" required="" type="email">
-                            <button class="btn" type="submit">Subscribe</button>
+                            <input name="email" placeholder="Địa chỉ email của bạn" required="" type="email">
+                            <button class="btn" type="submit">Đăng ký</button>
                         </form>
                     </div>
                     <!-- End Newsletter Inner -->

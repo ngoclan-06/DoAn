@@ -20,6 +20,8 @@ class UpdateSubCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            'status' => 'required',
+            'categories_id' => 'required'
             // 'image' => 'required',
         ];
     }

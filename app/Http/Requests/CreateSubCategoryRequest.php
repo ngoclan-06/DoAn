@@ -25,14 +25,14 @@ class CreateSubCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|unique:sub_categories,name',
-            'image' => 'required',
+            'image' => 'nullable',
         ];
     }
     public function messages()
     {
         return [
             'name.required' => 'Vui lòng nhập tên danh mục.',
-            'image.required' => 'Vui lòng chọn ảnh minh họa cho danh mục.',
+            // 'image.required' => 'Vui lòng chọn ảnh minh họa cho danh mục.',
             'unique' => 'Tên danh mục này đã tồn tại. Vui lòng nhập lại tên danh mục.'
         ];
     }

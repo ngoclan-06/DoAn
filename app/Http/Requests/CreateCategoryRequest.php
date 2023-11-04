@@ -25,7 +25,7 @@ class CreateCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|unique:categories,name',
-            'image' => 'required',
+            'image' => 'nullable',
             'status' => 'required',
         ];
     }
@@ -35,7 +35,7 @@ class CreateCategoryRequest extends FormRequest
             'name.required' => 'Vui lòng nhập tên danh mục.',
             'max' => 'Vui lòng không nhập quá 255 kí tự',
             'status.required' => 'Vui lòng chọn trạng thái cho banner.',
-            'image.required' => 'Vui lòng chọn ảnh.',
+            // 'image.required' => 'Vui lòng chọn ảnh.',
             'unique' => 'Tên danh mục đã tồn tại. Vui lòng nhập tên danh mục khác.'
         ];
     }

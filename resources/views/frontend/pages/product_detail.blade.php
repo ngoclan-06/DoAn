@@ -23,7 +23,7 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{ route('home-user') }}">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="{{ route('home-user') }}">Trang chủ<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="">Shop Details</a></li>
                         </ul>
                     </div>

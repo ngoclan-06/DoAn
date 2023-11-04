@@ -12,7 +12,7 @@ class CommentController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = $request->user()->id;
-        $data['status'] = 'active';
+        $data['status'] = 'inactive';
         $status = comments::create($data);
         if ($status) {
             return redirect()->back()->with('success', 'Cảm ơn bạn lời bình luận của bạn.');

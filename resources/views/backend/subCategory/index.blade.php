@@ -22,7 +22,7 @@
                                 <th>STT</th>
                                 <th>Tiêu đề</th>
                                 <th>Slug</th>
-                                <th>Ảnh</th>
+                                {{-- <th>Ảnh</th> --}}
                                 <th>Loại bánh</th>
                                 <th>Trạng thái</th>
                                 <th style="width: 100px">Action</th>
@@ -37,7 +37,7 @@
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->slug }}</td>
-                                    <td>
+                                    {{-- <td>
                                         @if ($category->image)
                                             <img src="{{ asset('image/subcategory/' . $category->image) }}"
                                                 class="img-fluid zoom" style="max-width:80px; width: 100px; height:50px;"
@@ -46,7 +46,7 @@
                                             <img src="{{ asset('backend/img/thumbnail-default.jpg') }}"
                                                 class="img-fluid zoom" style="max-width:20%" alt="avatar.png">
                                         @endif
-                                    </td>
+                                    </td> --}}
                                     <td>{{ $category->categories->name }}</td>
                                     <td>
                                         @if ($category->status == 1)

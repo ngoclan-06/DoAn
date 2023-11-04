@@ -16,8 +16,8 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
-                    <label for="inputImage" class="col-form-label">Ảnh<span class="text-danger">*</span></label>
+                {{-- <div class="form-group">
+                    <label for="inputImage" class="col-form-label">Ảnh</label>
                     <div class="input-group">
                         <span class="input-group-btn">
                             <input type="file" name="image" />
@@ -30,17 +30,19 @@
                     @error('image')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
 
                 <div class="form-group">
-                    <label for="parent_category" class="col-form-label">Loại bánh<span
+                    <label for="categories_id" class="col-form-label">Loại bánh<span
                             class="text-danger">*</span></label>
-                    <select name="parent_category" class="form-control">
+                    <select name="categories_id" class="form-control">
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ $category->id == $subcategory->categories_id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" 
+                                {{ $category->id == $subcategory->categories_id ? 'selected' : '' }}>
+                                {{ $category->name }}</option>
                         @endforeach
                     </select>
-                    @error('parent_category')
+                    @error('categories_id')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>

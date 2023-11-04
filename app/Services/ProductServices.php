@@ -21,12 +21,12 @@ class ProductServices
 
     public function store(Request $request)
     {
-        if ($request->hot != null) {
-            $hot = 1;
-        } else {
-            $hot = 0;
-        }
-        if ($request->status === 'Active') {
+        // if ($request->hot != null) {
+        //     $hot = 1;
+        // } else {
+        //     $hot = 0;
+        // }
+        if ($request->status === 'Còn bán') {
             $status = 1;
         } else {
             $status = 0;
@@ -54,7 +54,7 @@ class ProductServices
                 'expiry' => $request->expiry,
                 'quantity' => $request->quantity,
                 'description' => $request->description,
-                'hot' => $hot,
+                // 'hot' => $hot,
                 'status' => $status,
                 'image' => $image,
                 'sub_categories_id' => $request->sub_categories_id,
@@ -68,11 +68,11 @@ class ProductServices
 
     public function update(Request $request, $id)
     {
-        if ($request->hot != null) {
-            $hot = 1;
-        } else {
-            $hot = 0;
-        }
+        // if ($request->hot != null) {
+        //     $hot = 1;
+        // } else {
+        //     $hot = 0;
+        // }
         if ($request->status == 'Còn bán') {
             $status = 1;
         } else {
@@ -108,7 +108,7 @@ class ProductServices
                 'expiry' => $request->expiry,
                 'quantity' => $request->quantity,
                 'description' => $request->description,
-                'hot' => $hot,
+                // 'hot' => $hot,
                 'status' => $status,
                 'image' => $image,
                 'sub_categories_id' => $request->sub_categories_id,
@@ -168,7 +168,7 @@ class ProductServices
     {
         $now = now();
         $products = products::orderBy('id', 'DESC')->where('expiry', '<', $now)->paginate(20);
-        return $products;
+                return $products;
     }
 
     public function getProductOutOfStock()

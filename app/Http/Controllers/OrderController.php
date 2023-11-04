@@ -65,10 +65,11 @@ class OrderController extends Controller
         $order = order::create([
             'status' => 'new',
             'total' => $cart->totalCartPrice(),
-            'fullname' => 'Trần Tiến Đạt',
-            'email' => 'tiendat09022k1@gmail.com',
-            'address' => 'Nam Định',
-            'phone' => '0978084301',
+            // 'date' => now(),
+            'fullname' => 'Hà Thị Ngọc Lan',
+            'email' => 'hangoclan1710@gmail.com',
+            'address' => 'Vĩnh Phúc',
+            'phone' => '0985479172',
             'user_id' => Auth()->user()->id,
             'payment_id' => $payment->id,
         ]);

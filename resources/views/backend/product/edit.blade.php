@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="parent_category" class="col-form-label">Thể loại bánh'SCate'<span
+                    <label for="sub_categories_id" class="col-form-label">Thể loại bánh'SCate'<span
                             class="text-danger">*</span></label>
                     <select name="sub_categories_id" class="form-control">
                         @foreach ($subcategories as $subcategory)

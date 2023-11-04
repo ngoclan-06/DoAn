@@ -90,7 +90,7 @@ class UserController extends Controller
     public function getAllUserDelete()
     {
         $users = $this->userServices->getAllUserDelete();
-        return view('backend.users.index', compact('users'));
+        return view('backend.users.index', compact('users'))->with('i');
     }
     public function restore($id)
     {

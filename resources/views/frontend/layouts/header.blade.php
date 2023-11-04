@@ -20,9 +20,9 @@
                             {{-- <li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li> --}}
 
                             @if (Auth()->user())
-                                <li><i class="ti-location-pin"></i> <a href="{{ route('user.order') }}">Order</a></li>
+                                <li><i class="ti-location-pin"></i> <a href="{{ route('user.order') }}">Đặt hàng</a></li>
                                 <li><i class="ti-user"></i> <a href="{{ route('home-user') }}"
-                                        target="_blank">Dashboard</a></li>
+                                        target="_blank">Trang chủ</a></li>
                                 {{-- <li><i class="ti-power-off"></i> <a href="{{ route('user.logout') }}">Logout</a></li> --}}
                                 <!-- Nav Item - User Information -->
                                 <li>
@@ -46,18 +46,18 @@
                                         aria-labelledby="userDropdown">
                                         <a class="dropdown-item" href="{{ route('user.profile') }}">
                                             <i class="ti-user"></i>
-                                            Profile
+                                            Thông tin cá nhân
                                         </a>
                                         <a class="dropdown-item" href="{{ route('user-form-change-password') }}">
                                             <i class="fa-light fa-key"></i>
-                                            Change Password
+                                            Thay đổi mật khẩu
                                         </a>
-                                        <span class="dropdown-item"><i class="ti-power-off"></i> <a href="{{ route('user.logout') }}">Logout</a></span>
+                                        <span class="dropdown-item"><i class="ti-power-off"></i> <a href="{{ route('user.logout') }}">Đăng xuất</a></span>
                                     </div>
                                 </li>
                             @else
-                                <li><i class="ti-power-off"></i><a href="{{ route('user.view-login') }}">Login /</a> <a
-                                        href="{{ route('user.view-register') }}">Register</a>
+                                <li><i class="ti-power-off"></i><a href="{{ route('user.view-login') }}">Đăng nhập /</a> <a
+                                        href="{{ route('user.view-register') }}">Đăng ký</a>
                                 </li>
                             @endif
                         </ul>
@@ -96,7 +96,7 @@
                     <div class="search-bar-top">
                         <div class="search-bar">
                             <select>
-                                <option>All Category</option>
+                                <option>Loại bánh</option>
                                 @foreach ($category as $cat)
                                     <option>{{ $cat->name }}</option>
                                 @endforeach
@@ -127,11 +127,11 @@
                                     <div class="shopping-item">
                                         <div class="dropdown-cart-header">
                                             @if ($wishlists)
-                                                <span>{{ count($wishlists) }} Items</span>
+                                                <span>{{ count($wishlists) }} Danh mục</span>
                                             @else
-                                                <span>0 Items</span>
+                                                <span>0 Danh mục</span>
                                             @endif
-                                            <a href="{{ route('wishlist') }}">View Wishlist</a>
+                                            <a href="{{ route('wishlist') }}">Xem danh sách yêu thích</a>
                                         </div>
                                         <ul class="shopping-list">
                                             @foreach ($wishlists as $data)
@@ -154,7 +154,7 @@
                                                 <span>Total</span>
                                                 <span class="total-amount">đ</span>
                                             </div>
-                                            <a href="{{ route('cart') }}" class="btn animate">Cart</a>
+                                            <a href="{{ route('cart') }}" class="btn animate">Giỏ hàng</a>
                                         </div>
                                     </div>
                                 @endauth

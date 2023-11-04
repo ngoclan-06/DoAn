@@ -122,7 +122,6 @@ class FrontendController extends Controller
     }
     public function index()
     {
-
         $banners = banners::where('status', 1)->whereNull('deleted_at')->limit(3)->get();
         $products = products::where('status', 1)->whereNull('deleted_at')->limit(8)->get();
         $hotProducts = products::inRandomOrder()->where('status', 1)->whereNull('deleted_at')->limit(8)->get();
@@ -138,6 +137,7 @@ class FrontendController extends Controller
 
     public function productDetail($id)
     {
+        $now = now();
         $productDetail = products::where('id', $id)->first();
         $category = categories::where('status', 1)->get();
         $subcate = sub_categories::where('status', 1)->where('id', $productDetail->sub_categories_id)->first()->name;
@@ -225,32 +225,32 @@ class FrontendController extends Controller
 
     public function productCate($cateId)
     {
-        $products = categories::find($cateId)->products;
+        $products = categories::find($cateId)->products->where('status', '1');
         $recent_products = products::where('status', '1')->whereNull('deleted_at')->orderBy('id', 'DESC')->limit(3)->get();
 
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
         $carts = cart::all();
         $wishlists = Wishlist::all();
-        if (request()->is('e-shop.loc/product-grids')) {
-            return view('frontend.pages.product-grids', compact('products', 'recent_products', 'category', 'carts', 'wishlists'));
-        } else {
+        // if (request()->is('e-shop.loc/product-grids')) {
+        //     return view('frontend.pages.product-grids', compact('products', 'recent_products', 'category', 'carts', 'wishlists'));
+        // } else {
             return view('frontend.pages.product-lists', compact('products', 'recent_products', 'category', 'carts', 'wishlists'));
-        }
+        // }
     }
 
     public function productSubCate($subCateId)
     {
-        $products = sub_categories::find($subCateId)->products;
+        $products = sub_categories::find($subCateId)->products->where('status', '1');
         $recent_products = products::where('status', '1')->whereNull('deleted_at')->orderBy('id', 'DESC')->limit(3)->get();
 
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
         $carts = cart::all();
         $wishlists = Wishlist::all();
-        if (request()->is('e-shop.loc/product-grids')) {
-            return view('frontend.pages.product-grids', compact('products', 'recent_products', 'category', 'carts', 'wishlists'));
-        } else {
+        // if (request()->is('e-shop.loc/product-grids')) {
+        //     return view('frontend.pages.product-grids', compact('products', 'recent_products', 'category', 'carts', 'wishlists'));
+        // } else {
             return view('frontend.pages.product-lists', compact('products', 'recent_products', 'category', 'carts', 'wishlists'));
-        }
+        // }
     }
 
     public function productFilter(Request $request)
@@ -271,11 +271,11 @@ class FrontendController extends Controller
         if (!empty($data['price_range'])) {
             $priceRangeURL .= '&price=' . $data['price_range'];
         }
-        if (request()->is('e-shop.loc/product-grids')) {
-            return redirect()->route('product-grids',  $priceRangeURL . $showURL . $sortByURL);
-        } else {
+        // if (request()->is('e-shop.loc/product-grids')) {
+        //     return redirect()->route('product-grids',  $priceRangeURL . $showURL . $sortByURL);
+        // } else {
             return redirect()->route('product-lists',  $priceRangeURL . $showURL . $sortByURL);
-        }
+        // }
     }
 
     public function productSearch(Request $request)
@@ -291,7 +291,7 @@ class FrontendController extends Controller
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
         $carts = cart::all();
         $wishlists = Wishlist::all();
-        return view('frontend.pages.product-grids', compact('products', 'recent_products', 'category', 'carts', 'wishlists'));
+        return view('frontend.pages.product-lists', compact('products', 'recent_products', 'category', 'carts', 'wishlists'));
     }
 
     public function orderIndex()
@@ -326,7 +326,7 @@ class FrontendController extends Controller
     public function blogDetail($id)
     {
         $blog = blog::find($id);
-        $comments = comments::where('blog_id', $blog->id)->paginate(10);
+        $comments = comments::where('blog_id', $blog->id)->where('status', 'active')->paginate(10);
         $carts = cart::all();
         $wishlists = Wishlist::all();
         $recent_blogs = blog::orderBy('id', 'DESC')->where('status', 1)->whereNull('deleted_at')->limit(3)->get();

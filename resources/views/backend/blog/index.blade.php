@@ -22,7 +22,7 @@
                                 <th>STT</th>
                                 <th>Tiêu đề</th>
                                 <th>Ảnh</th>
-                                <th>Đocwj tạo bởi</th>
+                                <th>Được tạo bởi</th>
                                 <th>Trạng thái</th>
                                 <th>Lựa chọn</th>
                             </tr>

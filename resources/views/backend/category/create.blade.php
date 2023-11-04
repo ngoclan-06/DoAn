@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputImage" class="col-form-label">Ảnh<span class="text-danger">*</span></label>
+                    <label for="inputImage" class="col-form-label">Ảnh</label>
                     <div class="input-group">
                         <span class="input-group-btn">
                             <input type="file" name="image" />
