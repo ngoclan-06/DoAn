@@ -167,8 +167,17 @@ class ProductServices
     public function getProductsexpired()
     {
         $now = now();
-        $products = products::orderBy('id', 'DESC')->where('expiry', '<', $now)->paginate(20);
-                return $products;
+
+        $products = products::where('expiry', '<', $now)
+            ->orderBy('id', 'DESC')
+            ->update(['status' => 0]);
+
+        $updatedProducts = products::where('expiry', '<', $now)
+            ->orderBy('id', 'DESC')
+            ->paginate(20);
+
+        return $updatedProducts;
+
     }
 
     public function getProductOutOfStock()

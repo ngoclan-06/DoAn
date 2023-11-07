@@ -112,6 +112,6 @@ class ProductsController extends Controller
             ->orwhere('price', 'like', '%' . $request->search . '%')
             ->orderBy('id', 'DESC')
             ->paginate('9');
-        return view('backend.product.index', compact('products'));
+        return view('backend.product.index', compact('products'))->with('i');
     }
 }

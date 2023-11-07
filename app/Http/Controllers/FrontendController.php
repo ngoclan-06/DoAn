@@ -280,14 +280,16 @@ class FrontendController extends Controller
 
     public function productSearch(Request $request)
     {
-        // $now = now();
-        // ->where('expiry', '>', $now)
         $recent_products = products::where('status', '1')->orderBy('id', 'DESC')->whereNull('deleted_at')->limit(3)->get();
-        $products = products::whereNull('deleted_at')->orwhere('name', 'like', '%' . $request->search . '%')
-            ->orwhere('description', 'like', '%' . $request->search . '%')
-            ->orwhere('price', 'like', '%' . $request->search . '%')
+        $products = products::where('status', 1)
+            ->where(function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('description', 'like', '%' . $request->search . '%')
+                    ->orWhere('price', 'like', '%' . $request->search . '%');
+            })
             ->orderBy('id', 'DESC')
-            ->paginate('9');
+            ->whereNull('deleted_at')
+            ->paginate(9);
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
         $carts = cart::all();
         $wishlists = Wishlist::all();
