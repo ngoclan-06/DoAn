@@ -7,52 +7,30 @@
             </div>
         </div>
         <h5 class="card-header">Tin nhắn</h5>
-        <div class="card-body">
-            @if (count($messages) > 0)
-                <table class="table message-table" id="message-dataTable">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Tên khách hàng</th>
-                            <th scope="col">Danh mục</th>
-                            <th scope="col">Ngày</th>
-                            <th scope="col">Lựa chọn</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($messages as $message)
-                            <tr
-                                class="@if ($message->read_at) border-left-success @else bg-light border-left-warning @endif">
-                                <td scope="row">{{ $loop->index + 1 }}</td>
-                                <td>{{ $message->name }} {{ $message->read_at }}</td>
-                                <td>{{ $message->subject }}</td>
-                                <td>{{ $message->created_at->format('F d, Y h:i A') }}</td>
-                                <td>
-                                    <a href="{{ route('message.show', $message->id) }}"
-                                        class="btn btn-primary btn-sm float-left mr-1"
-                                        style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip"
-                                        title="view" data-placement="bottom"><i class="fas fa-eye"></i></a>
-                                    <form method="POST" action="{{ route('message.delete', $message->id) }}">
-                                        @csrf
-                                        @method('delete')
-                                        <button onclick="return confirm('Bạn có chắc chắn muốn xóa không?')"
-                                            class="btn btn-danger btn-sm dltBtn" data-id={{ $message->id }}
-                                            style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip"
-                                            data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <nav class="blog-pagination justify-content-center d-flex">
-                    {{ $messages->links('pagination::bootstrap-4') }}
-                </nav>
-            @else
-                <h6 class="text-center">Không tìm thấy message nào!!!</h6>
-            @endif
-        </div>
+        {{-- @include('backend.messages.master-message') --}}
+        @include('backend.message.message')
+        <div class="container">
+    {{-- <h2>Chat với {{ $messages->user->name }}</h2>
+
+    <div class="chat-box">
+        <!-- Hiển thị tất cả tin nhắn, sắp xếp theo thời gian -->
+        @foreach ($allMessages as $message)
+            <div class="message">
+                {{ $message->message }}
+            </div>
+        @endforeach
     </div>
+
+    <!-- Form gửi tin nhắn -->
+    <form action="{{ route('message.sendMessage') }}" method="post">
+        @csrf
+        <input type="hidden" name="userId" value="{{ $messages->user->id }}">
+        <textarea name="message" placeholder="Nhập tin nhắn"></textarea>
+        <button type="submit">Gửi</button>
+    </form>
+</div> --}}
+
+        
 @endsection
 @push('styles')
     <link href="{{ asset('backend/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">

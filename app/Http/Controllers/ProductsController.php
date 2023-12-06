@@ -114,4 +114,10 @@ class ProductsController extends Controller
             ->paginate('9');
         return view('backend.product.index', compact('products'))->with('i');
     }
+
+    public function getProductSurvive()
+    {
+        $products = $this->productServices->getProductSurvive();
+        return view('backend.product.index', compact('products'))->with('i');
+    }
 }

@@ -27,14 +27,14 @@
                 <div class="col-lg-6 offset-lg-3 col-12">
                     <div class="login-form">
                         <h2>Đăng ký</h2>
-                        <p>Please register in order to checkout more quickly</p>
+                        <p>Vui lòng đăng ký để thanh toán nhanh hơn</p>
                         <!-- Form -->
                         <form class="form" method="post" action="{{route('user.register')}}">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Your Name<span>*</span></label>
+                                        <label>tên khách hàng:<span>*</span></label>
                                         <input type="text" name="name" placeholder="Enter your name" value="{{old('name')}}">
                                         @error('name')
                                             <span class="text-danger">{{$message}}</span>
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Your Address<span>*</span></label>
+                                        <label>Địa chỉ:<span>*</span></label>
                                         <input type="text" name="address" placeholder="Enter your email" value="{{old('address')}}">
                                         @error('address')
                                             <span class="text-danger">{{$message}}</span>
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Your Phone<span>*</span></label>
+                                        <label>Số điện thoại:<span>*</span></label>
                                         <input type="text" name="phone" placeholder="Enter your email" value="{{old('phone')}}">
                                         @error('phone')
                                             <span class="text-danger">{{$message}}</span>
@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Your Email<span>*</span></label>
+                                        <label>Email:<span>*</span></label>
                                         <input type="text" name="email_address" placeholder="Enter your email" value="{{old('email_address')}}">
                                         @error('email_address')
                                             <span class="text-danger">{{$message}}</span>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Your Password<span>*</span></label>
+                                        <label>Mật khẩu:<span>*</span></label>
                                         <input type="password" name="password" placeholder="Enter your password"  value="{{old('password')}}">
                                         @error('password')
                                             <span class="text-danger">{{$message}}</span>
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Confirm Password<span>*</span></label>
+                                        <label>Nhập lại mật khẩu:<span>*</span></label>
                                         <input type="password" name="password_confirmation" placeholder="Enter your password confirmation" value="{{old('password_confirmation')}}">
                                         @error('password_confirmation')
                                             <span class="text-danger">{{$message}}</span>
@@ -88,12 +88,12 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group login-btn">
-                                        <button class="btn" type="submit">Register</button>
-                                        <a href="{{route('user.view-login')}}" class="btn">Login</a>
-                                        OR
-                                        <a href="" class="btn btn-facebook"><i class="ti-facebook"></i></a>
-                                        <a href="" class="btn btn-github"><i class="ti-github"></i></a>
-                                        <a href="{{ URL::to('googleLogin') }}" class="btn btn-google"><i class="ti-google"></i></a>
+                                        <button class="btn" type="submit">Đăng ký</button>
+                                        <a href="{{route('user.view-login')}}" class="btn">Đăng nhập</a>
+                                        HOẶC
+                                        {{-- <a href="" class="btn btn-facebook"><i class="ti-facebook"></i></a> --}}
+                                        {{-- <a href="" class="btn btn-github"><i class="ti-github"></i></a> --}}
+                                        <a href="{{ route('google.login') }}" class="btn btn-google"><i class="ti-google"></i></a>
                                     </div>
                                 </div>
                             </div>

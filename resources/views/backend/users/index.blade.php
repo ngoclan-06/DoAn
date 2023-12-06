@@ -17,6 +17,13 @@
                 data-placement="bottom" title="Add User"> Danh sách tài khoản đã xóa</a>
         </div>
         <div class="card-body">
+            <div class="float-right" style="margin-bottom: 15px">
+                <form action="{{ route('users.search') }}" method="POST">
+                    @csrf
+                    <input type="search" name="search">
+                    <button>Tìm kiếm</button>
+                </form>
+            </div>
             <div class="table-responsive">
                 @if (count($users))
                     <table class="table table-bordered" id="user-dataTable" width="100%" cellspacing="0">
@@ -55,8 +62,10 @@
                                     <td>
                                         @if ($user->role == 1)
                                             Nhân viên
-                                        @else
+                                        @elseif ($user->role == 0)
                                             Khách hàng
+                                        @else 
+                                            Quản lý
                                         @endif
                                     </td>
                                     @if ($user->deleted_at == null)

@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Message extends Model
+class MessageKh extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'messages';
+    protected $table = 'message_kh';
     public const STATUS_NO = 0;
     public const STATUS_YES = 1;
 
@@ -34,12 +34,15 @@ class Message extends Model
         'deleted_at'
     ];
 
+    // Định nghĩa quan hệ nhiều-một với Message
+    public function message()
+    {
+        return $this->belongsTo(Message::class);
+    }
+
+    // Định nghĩa quan hệ nhiều-một với User
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-    public function messagekh()
-    {
-        return $this->hasMany(MessageKh::class);
     }
 }

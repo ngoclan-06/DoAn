@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>HaVyBakery || Login Page</title>
+    <title>HaVyBakery || Register Page</title>
     @include('backend.layouts.head')
 
     <style type="text/css">
@@ -34,8 +34,8 @@
             justify-content: center;
             align-items: center;
         }
-        h4{
-            font-size: 2em;
+        h2{
+            font-size: 4em;
             color: #fff;
             text-align: center;
         }
@@ -137,70 +137,70 @@
         <div class="form-box">
             <div class="form-value">
                 
-                <form action="{{ route('login') }}" method="post" enctype="multipart/form-data">
+                <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
 
-                    @if (session('Forbidden'))
-                    <div class="alert alert-danger">{{ session('Forbidden') }}</div>
-                    @endif
-                    @if (session('Unauthorized'))
-                        <div class="alert alert-danger">{{ session('Unauthorized') }}</div>
-                    @endif
-                    @if (session('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>
-                    @endif
-                    @error('acount')
-                        <p class="alert alert-danger">{{ $message }}</p>
-                    @enderror
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
-                    @csrf
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-                    <h4>ĐĂNG NHẬP</h4>
-                    <div class="inputbox">
-                        <ion-icon name="mail-outline"></ion-icon>
-                        <input type="email" name="email_address" required>
-                        <label for="">Email</label>
-                    </div>
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                    <div class="inputbox">
-                        <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input type="password" name="password" required>
-                        <label for="">Mật khẩu</label>
-                    </div>
-                    <button class="btn btn-primary" type="submit" name="submit">Login</button>
-                    {{-- <button type="submit" class="btn btn-primary" style="margin-top:7px;"> --}}
-                        <a href="{{route('view-register')}}" style="margin-left:127px; color:#fff; margin-top:3px;">Đăng ký</a>
-                    {{-- </button> --}}
-                    {{-- <a href="{{route('coupon.create')}}" type="submit" class="btn btn-primary">Register</a> --}}
-                    {{ csrf_field() }}
-                </form>
-                <hr>
-                <div class="text-center">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember"
-                            id="remember">
-                        <label class="form-check-label" for="remember" style ="color: #fff">
-                            {{ __('Nhớ tài khoản') }}
-                        </label>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="text-center">
-                    @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('password.request') }}" style ="color: #400fe4">
-                            {{ __('Bạn quên mật khẩu?') }}
-                        </a>
-                    @endif
-                </div>
-                @if (isset($errors))
-                    <p style="color:rgb(255, 0, 0); font-size: 8.5px;">
-                        @foreach ($errors->all() as $error)
-                            {!! $error !!}<br/>
-                        @endforeach
-                    </p>
-                @endif
-                @if (isset($message))
-                    <p style="color:rgb(72, 0, 255);">
-                        {{ $message }}
-                    </p>
-                @endif 
+            </div> 
             </div>
         </div>
     </section>

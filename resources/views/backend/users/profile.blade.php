@@ -11,10 +11,10 @@
             </div>
         </div>
         <div class="card-header py-3">
-            <h4 class=" font-weight-bold">Profile</h4>
+            <h4 class=" font-weight-bold">Thông tin cá nhân</h4>
             <ul class="breadcrumbs">
-                <li><a href="{{ route('home') }}" style="color:#999">Dashboard</a></li>
-                <li><a href="" class="active text-primary">Profile Page</a></li>
+                <li><a href="{{ route('home') }}" style="color:#999">Trang chủ</a></li>
+                <li><a href="" class="active text-primary">Thông tin cá nhân</a></li>
             </ul>
         </div>
         <div class="card-body">
@@ -39,9 +39,9 @@
                                     {{ $profile->email_address }}</small></p>
                             <p class="card-text text-left"><small class="text-muted"><i class="fas fa-hammer"></i>
                                     @if ($profile->role == 1)
-                                        Employee
+                                        Nhân viên
                                     @elseif($profile->role == 2)
-                                        Super Admin
+                                        Quản lý
                                     @endif
                                 </small></p>
                         </div>
@@ -53,7 +53,7 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="inputTitle" class="col-form-label">Name</label>
+                            <label for="inputTitle" class="col-form-label">Tên</label>
                             <input id="inputTitle" type="text" name="name" placeholder="Enter name"
                                 value="{{ $profile->name }}" class="form-control">
                             @error('name')
@@ -71,7 +71,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputEmail" class="col-form-label">Phone Number</label>
+                            <label for="inputEmail" class="col-form-label">Số điện thoại</label>
                             <input id="inputEmail" type="text" name="phone" placeholder="Enter phone"
                                 value="{{ $profile->phone }}" class="form-control">
                             @error('phone')
@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputEmail" class="col-form-label">Address</label>
+                            <label for="inputEmail" class="col-form-label">Địa chỉ</label>
                             <input id="inputEmail" type="text" name="address" placeholder="Enter email"
                                 value="{{ $profile->address }}" class="form-control">
                             @error('address')
@@ -88,7 +88,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="inputImage" class="col-form-label">Image<span class="text-danger"></span></label>
+                            <label for="inputImage" class="col-form-label">Ảnh<span class="text-danger"></span></label>
                             <div class="input-group">
                                 <span class="input-group-btn">
                                     <input type="file" name="image" />
@@ -100,18 +100,18 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="role" class="col-form-label">Role</label>
+                            <label for="role" class="col-form-label">Quyền</label>
                             <select disabled name="role" class="form-control">
-                                <option value="">-----Select Role-----</option>
-                                <option value="admin" {{ $profile->role == '1' ? 'selected' : '' }}>Admin</option>
-                                <option value="user" {{ $profile->role == '2' ? 'selected' : '' }}>Super Admin</option>
+                                <option value="">-----Chọn quyền-----</option>
+                                <option value="admin" {{ $profile->role == '1' ? 'selected' : '' }}>Nhân viên</option>
+                                <option value="user" {{ $profile->role == '2' ? 'selected' : '' }}>Quản lý</option>
                             </select>
                             @error('role')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <button type="reset" class="btn btn-warning btn-sm">Reset</button>
-                        <button type="submit" class="btn btn-success btn-sm">Update</button>
+                        <button type="submit" class="btn btn-success btn-sm">Cập nhật</button>
                     </form>
                 </div>
             </div>

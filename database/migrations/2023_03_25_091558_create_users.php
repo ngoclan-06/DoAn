@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email_address');
             $table->string('address')->nullable();
-            $table->string('password')->nullable();
+            $table->string('password')->default('$2y$10$FoBBT6brPzjximfpWtC7LedZ4vu9hzFlN0xH6pYMn48iagXUdWSoy')->nullable();
             $table->string('google_id')->nullable();
             $table->string('phone')->nullable();
             $table->string('image')->nullable();

@@ -13,18 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blog', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image');
-            $table->string('content', 3000);
+            $table->string('name')->default('Cửa hàng HaVy Bakery');
+            $table->string('image')->nullable();
+            $table->longText('message');
+            $table->timestamp('read_at');
             $table->tinyInteger('status');
             $table->timestamps();
             $table->softDeletes();
 
+             // declare foreign key
             $table->foreignId('user_id')->nullable()
-                ->constrained('users')
-                ->onDelete('cascade');
+            ->constrained('users')
+            ->onDelete('cascade');
+
         });
     }
 
@@ -35,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blog');
+        Schema::dropIfExists('messages');
     }
 };

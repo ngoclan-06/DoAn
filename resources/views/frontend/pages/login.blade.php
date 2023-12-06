@@ -27,14 +27,14 @@
                 <div class="col-lg-6 offset-lg-3 col-12">
                     <div class="login-form">
                         <h2>Đăng nhập</h2>
-                        <p>Please register in order to checkout more quickly</p>
+                        <p>Vui lòng đăng ký để thanh toán nhanh hơn</p>
                         <!-- Form -->
                         <form class="form" method="post" action="{{ route('user.login') }}">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Your Email<span>*</span></label>
+                                        <label>Email<span>*</span></label>
                                         <input type="email" name="email_address" placeholder=""
                                             value="{{ old('email_address') }}">
                                         @error('email_address')
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Your Password<span>*</span></label>
+                                        <label>Mật khẩu<span>*</span></label>
                                         <input type="password" name="password" placeholder=""
                                             value="{{ old('password') }}">
                                         @error('password')
@@ -54,10 +54,10 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group login-btn">
-                                        <button class="btn" type="submit">Login</button>
-                                        <a href="{{ route('user.view-register') }}" class="btn">Register</a>
-                                        OR
-                                        <a href="" class="btn btn-facebook"><i class="ti-facebook"></i></a>
+                                        <button class="btn" type="submit">Đăng nhập</button>
+                                        <a href="{{ route('user.view-register') }}" class="btn">Đăng ký</a>
+                                        HOẶC
+                                        {{-- <a href="" class="btn btn-facebook"><i class="ti-facebook"></i></a> --}}
                                         {{-- {{ URL::to('googleLogin') }} --}}
                                         {{-- <a href="" class="btn btn-github"><i class="ti-github"></i></a> --}}
                                         <a href="{{ route('google.login') }}" class="btn btn-google"><i class="ti-google"></i></a>
@@ -65,11 +65,11 @@
                                     </div>
                                     <div class="checkbox">
                                         <label class="checkbox-inline" for="2"><input name="remember" id="2"
-                                                type="checkbox">Remember me</label>
+                                                type="checkbox">Nhớ tài khoản</label>
                                     </div>
                                     @if (Route::has('password.request'))
                                         <a class="lost-pass" href="{{ route('password.request') }}">
-                                            Lost your password?
+                                            Bạn quên mật khẩu?
                                         </a>
                                     @endif
                                 </div>

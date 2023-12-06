@@ -12,7 +12,7 @@ class MessageServices
 {
     public function getAllMessage()
     {
-        $messages = Message::orderBy('id', 'ASC')->paginate(10);
+        $messages = Message::with('user')->get();
         return $messages;
     }
 
@@ -23,9 +23,9 @@ class MessageServices
 
             $messages = Message::create([
                 'name' => $request->name,
-                'subject' => $request->subject,
-                'email' => $request->email,
-                'phone' => $request->phone,
+                'image' => $request->image,
+                'user_id' => $request->user_id,
+                'status' => $request->status,
                 'message' => $request->message
             ]);
             DB::commit();

@@ -13,12 +13,13 @@ class UserServices
     public function getAllUsers()
     {
 
-        $users = User::orderBy('id', 'ASC')->where('role', '!=', 2)->paginate(25);
+        // $users = User::orderBy('id', 'ASC')->where('role', '!=', 2)->paginate(25);
+        $users = User::orderBy('id', 'ASC')->paginate(10);
         return $users;
     }
     public function getAllUserDelete()
     {
-        $users = User::orderBy('id', 'ASC')->onlyTrashed()->paginate(25);
+        $users = User::orderBy('id', 'ASC')->onlyTrashed()->paginate(10);
         return $users;
     }
     public function store(Request $request)
@@ -34,7 +35,7 @@ class UserServices
             $users = User::create([
                 'name' => $request->name,
                 'email_address' => $request->email_address,
-                'password' => Hash::make('12345678'),
+                // 'password' => Hash::make('12345678'),
                 'address' => $request->address,
                 'phone' => $request->phone,
                 'role' => $role,

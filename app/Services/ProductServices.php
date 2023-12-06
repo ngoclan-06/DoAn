@@ -15,8 +15,24 @@ class ProductServices
     public function getAllProducts()
     {
         $now = now();
-        $products = products::orderBy('id', 'DESC')->where('expiry', '>=', $now)->paginate(20);
+        $products = products::orderBy('id', 'DESC')->where('expiry', '>=', $now)->paginate(10);
+    //     $products = products::select('name', DB::raw('SUM(quantity) as total_quantity'))
+    // ->where('expiry', '>=', $now)
+    // ->groupBy('name')
+    // ->orderBy('id', 'DESC')
+    // ->paginate(10);
+
         return $products;
+
+        // $now = now();
+
+        // $products = products::select('*', \DB::raw('SUM(quantity) as total_quantity'))
+        //     ->where('expiry', '>=', $now)
+        //     ->groupBy('name', 'sub_categories_id')
+        //     ->paginate(10);
+
+        // return $products;
+
     }
 
     public function store(Request $request)
@@ -174,7 +190,7 @@ class ProductServices
 
         $updatedProducts = products::where('expiry', '<', $now)
             ->orderBy('id', 'DESC')
-            ->paginate(20);
+            ->paginate(10);
 
         return $updatedProducts;
 
@@ -182,7 +198,15 @@ class ProductServices
 
     public function getProductOutOfStock()
     {
-        $products = products::orderBy('id', 'DESC')->where('quantity', '0')->paginate(20);
+        $products = products::orderBy('id', 'DESC')->where('quantity', '0')->paginate(10);
+        return $products;
+    }
+
+    public function getProductSurvive()
+    {
+        //tồn theo ngày
+        $now = now();
+        $products = products::orderBy('id', 'DESC')->where('date_of_manufacture', '<', $now)->where('quantity','>', '0')->paginate(10);
         return $products;
     }
 }

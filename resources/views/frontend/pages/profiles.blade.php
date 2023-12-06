@@ -45,7 +45,7 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="inputTitle" class="col-form-label">Name</label>
+                            <label for="inputTitle" class="col-form-label">Tên khách hàng</label>
                             <input id="inputTitle" type="text" name="name" placeholder="Enter name"
                                 value="{{ $profile->name }}" class="form-control">
                             @error('name')
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputEmail" class="col-form-label">Phone Number</label>
+                            <label for="inputEmail" class="col-form-label">Số điện thoại</label>
                             <input id="inputEmail" type="text" name="phone" placeholder="Enter phone"
                                 value="{{ $profile->phone }}" class="form-control">
                             @error('phone')
@@ -72,7 +72,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputEmail" class="col-form-label">Address</label>
+                            <label for="inputEmail" class="col-form-label">Địa chỉ</label>
                             <input id="inputEmail" type="text" name="address" placeholder="Enter email"
                                 value="{{ $profile->address }}" class="form-control">
                             @error('address')
@@ -80,7 +80,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="inputImage" class="col-form-label">Image<span class="text-danger"></span></label>
+                            <label for="inputImage" class="col-form-label">Ảnh<span class="text-danger"></span></label>
                             <div class="input-group">
                                 <span class="input-group-btn">
                                     <input type="file" name="image" />
@@ -91,8 +91,8 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <a style="color: white" href="{{ route('home-user') }}" class="btn btn-warning btn-sm">Cancle</a>
-                        <button type="submit" class="btn btn-success btn-sm">Update</button>
+                        <a style="color: white" href="{{ route('home-user') }}" class="btn btn-warning btn-sm">Quay lại</a>
+                        <button type="submit" class="btn btn-success btn-sm">Cập nhật</button>
                     </form>
                 </div>
             </div>

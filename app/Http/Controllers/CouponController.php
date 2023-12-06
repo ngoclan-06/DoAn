@@ -11,8 +11,17 @@ class CouponController extends Controller
 
     public function index()
     {
-        $coupons = Coupon::orderBy('id', 'DESC')->paginate('10');
+        $now = now();
+
+        // Update the status of coupons where expired date is less than the current date
+        Coupon::where('expired', '<', $now)
+            ->update(['status' => 'inactive']);
+
+        // Retrieve the paginated coupons after the update
+        $coupons = Coupon::orderBy('id', 'DESC')->paginate(10);
+
         return view('backend.coupon.index', compact('coupons'))->with('i');
+
     }
 
 
@@ -29,11 +38,13 @@ class CouponController extends Controller
                 'code' => 'string|required',
                 'type' => 'required|in:fixed,percent',
                 'value' => 'required|numeric',
-                'status' => 'required|in:active,inactive'
+                'status' => 'required|in:active,inactive',
+                'expired' => 'required'
             ],
             [
                 'code' => 'Vui lòng nhập mã code giảm giá.',
                 'value' => 'Vui lòng nhập tỷ lệ phần trăm giảm giá.',
+                'expired' => 'Vui lòng chọn ngày hết hạn.',
             ]
         );
         $data = $request->all();
@@ -62,7 +73,8 @@ class CouponController extends Controller
             'code' => 'string|required',
             'type' => 'required|in:fixed,percent',
             'value' => 'required|numeric',
-            'status' => 'required|in:active,inactive'
+            'status' => 'required|in:active,inactive',
+            'expired' => 'required'
         ]);
         $data = $request->all();
 

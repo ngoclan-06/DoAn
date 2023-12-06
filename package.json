@@ -18,6 +18,11 @@
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "sass": "^1.56.1",
-        "vue": "^3.2.37"
+        "vue": "^3.2.36"
+    },
+    "dependencies": {
+        "ioredis": "^5.3.2",
+        "socket.io": "^4.7.2",
+        "vue-loader": "^17.3.1"
     }
 }

@@ -24,7 +24,7 @@
                     <div class="bread-inner">
                         <ul class="bread-list">
                             <li><a href="{{ route('home-user') }}">Trang chủ<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="">Shop Details</a></li>
+                            <li class="active"><a href="">Chi tiết sản phẩm</a></li>
                         </ul>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                                                 @endif
                                             @endfor
                                         </ul>
-                                        <a href="#" class="total-review">({{$productDetail->productReviews->count()}}) Review</a>
+                                        <a href="#" class="total-review">({{$productDetail->productReviews->count()}}) Đánh giá</a>
                                     </div>
                                     <p class="price"><span>{{ number_format($productDetail->price, 0) }}đ</span>
                                     </p>
@@ -81,7 +81,7 @@
                                     <form action="" method="POST">
                                         @csrf
                                         <div class="quantity">
-                                            <h6>Quantity :</h6>
+                                            <h6>Số lượng :</h6>
                                             <!-- Input Order -->
                                             <div class="input-group">
                                                 <div class="button minus">
@@ -104,15 +104,15 @@
                                         </div>
                                         <div class="add-to-cart mt-4">
                                             @if ($productDetail->quantity > 0)
-                                                <a title="Add to cart" class="btn" href="{{ route('add-to-cart', $productDetail->id) }}">Add to cart</a>
+                                                <a title="Add to cart" class="btn" href="{{ route('add-to-cart', $productDetail->id) }}">Thêm vào giỏ hàng</a>
                                             @else
-                                            <a style="pointer-events: none;" title="Add to cart" class="btn" href="{{ route('add-to-cart', $productDetail->id) }}">Add to cart</a>
+                                            <a style="pointer-events: none;" title="Add to cart" class="btn" href="{{ route('add-to-cart', $productDetail->id) }}">Thêm vào giỏ hàng</a>
                                             @endif
                                             <a href="" class="btn min"><i class="ti-heart"></i></a>
                                         </div>
                                     </form>
-                                    <p class="cat mt-1">Sub Category :<a href="">{{ $subcate }}</a></p>
-                                    <p class="availability">Quantity : @if ($productDetail->quantity > 0)
+                                    <p class="cat mt-1">Danh mục sản phẩm:<a href="">{{ $subcate }}</a></p>
+                                    <p class="availability">Số lượng : @if ($productDetail->quantity > 0)
                                             <span class="badge badge-success">{{ $productDetail->quantity }}</span>
                                         @else
                                             <span class="badge badge-danger">{{ $productDetail->quantity }}</span>
@@ -130,9 +130,9 @@
                                     <!-- Tab Nav -->
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item"><a class="nav-link active" data-toggle="tab"
-                                                href="#description" role="tab">Description</a></li>
+                                                href="#description" role="tab">Mô tả</a></li>
                                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#reviews"
-                                                role="tab">Reviews</a></li>
+                                                role="tab">Đánh giá</a></li>
                                     </ul>
                                     <!--/ End Tab Nav -->
                                 </div>
@@ -159,7 +159,7 @@
                                                     <!-- Review -->
                                                     <div class="comment-review">
                                                         <div class="add-review">
-                                                            <h5>Add A Review</h5>
+                                                            <h5>Thêm đánh giá</h5>
                                                             <p>Your email address will not be published. Required fields are
                                                                 marked</p>
                                                         </div>
@@ -220,14 +220,14 @@
                                                                         </div>
                                                                         <div class="col-lg-12 col-12">
                                                                             <div class="form-group">
-                                                                                <label>Write a review</label>
+                                                                                <label>Viết đánh giá</label>
                                                                                 <textarea name="review" rows="6" placeholder=""></textarea>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-12 col-12">
                                                                             <div class="form-group button5">
                                                                                 <button type="submit"
-                                                                                    class="btn">Submit</button>
+                                                                                    class="btn">Đánh giá</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -307,7 +307,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Related Products</h2>
+                        <h2>Sản phẩm liên quan</h2>
                     </div>
                 </div>
             </div>

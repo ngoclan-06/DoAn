@@ -28,11 +28,11 @@
                         <table class="table shopping-summery">
                             <thead>
                                 <tr class="main-hading">
-                                    <th>PRODUCT</th>
-                                    <th>NAME</th>
-                                    <th class="text-center">UNIT PRICE</th>
-                                    <th class="text-center">QUANTITY</th>
-                                    <th class="text-center">TOTAL</th>
+                                    <th>SẢN PHẨM</th>
+                                    <th>TÊN</th>
+                                    <th class="text-center">GIÁ SẢN PHẨM</th>
+                                    <th class="text-center">SỐ LƯỢNG</th>
+                                    <th class="text-center">TỔNG CỘNG</th>
                                     <th class="text-center"><i class="ti-trash remove-icon"></i></th>
                                 </tr>
                             </thead>
@@ -91,14 +91,14 @@
                                         <td></td>
                                         <td></td>
                                         <td class="float-right">
-                                            <button class="btn float-right" type="submit">Update</button>
+                                            <button class="btn float-right" type="submit">Cập nhật</button>
                                         </td>
                                         </track>
                                     @else
                                         <tr>
                                             <td class="text-center">
-                                                There are no any carts available. <a href="{{ route('product-grids') }}"
-                                                    style="color:blue;">Continue shopping</a>
+                                                Không có sản phẩm nào trong giỏ hàng <a href="{{ route('product-grids') }}"
+                                                    style="color:blue;">Tiếp tục xem sản phẩm</a>
                                             </td>
                                         </tr>
                                     @endif
@@ -119,8 +119,8 @@
                                         <div class="coupon">
                                             <form action="{{ route('cart.applyCoupon') }}" method="POST">
                                                 @csrf
-                                                <input name="code" placeholder="Enter Your Coupon">
-                                                <button class="btn">Apply</button>
+                                                <input name="code" placeholder="Nhập mã giảm giá">
+                                                <button class="btn">Chấp nhận</button>
                                             </form>
                                         </div>
                                     </div>
@@ -134,12 +134,10 @@
                                             }
                                         @endphp
                                         <ul>
-                                            <li class="order_subtotal" data-price="">Cart
-                                                Subtotal<span>{{ number_format($sum, 0) }}đ</span></li>
+                                            <li class="order_subtotal" data-price="">Tổng tiền giỏ hàng<span>{{ number_format($sum, 0) }}đ</span></li>
                                             @if (session()->has('coupon'))
                                                 <li class="coupon_price"
-                                                    data-price="{{ Session::get('coupon')['value'] }}">You
-                                                    Save<span>-{{ number_format(Session::get('coupon')['value'], 0) }}đ</span>
+                                                    data-price="{{ Session::get('coupon')['value'] }}">Bạn cần thanh toán<span>-{{ number_format(Session::get('coupon')['value'], 0) }}đ</span>
                                                 </li>
                                             @endif
                                             @php
@@ -157,8 +155,8 @@
                                             @endif
                                         </ul>
                                         <div class="button5">
-                                            <a href="{{ route('checkout') }}" class="btn">Checkout</a>
-                                            <a href="{{ route('product-grids') }}" class="btn">Continue shopping</a>
+                                            <a href="{{ route('checkout') }}" class="btn">Thanh toán</a>
+                                            <a href="{{ route('product-grids') }}" class="btn">Tiếp tục xem sản phẩm</a>
                                         </div>
                                     </div>
                                 </div>

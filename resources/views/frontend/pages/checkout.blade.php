@@ -12,7 +12,7 @@
                     <div class="bread-inner">
                         <ul class="bread-list">
                             <li><a href="{{ route('home-user') }}">Trang chủ<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="javascript:void(0)">Checkout</a></li>
+                            <li class="active"><a href="javascript:void(0)">Thanh toán</a></li>
                         </ul>
                     </div>
                 </div>
@@ -29,12 +29,12 @@
                 <div class="row">
                     <div class="col-lg-8 col-12">
                         <div class="checkout-form">
-                            <h2>Make Your Checkout Here</h2>
-                            <p>Please register in order to checkout more quickly</p>
+                            <h2>Hãy thanh toán ở đây</h2>
+                            <p>Vui lòng đăng ký để thanh toán nhanh hơn</p>
                             <!-- Form -->
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
-                                    <label>Full Name<span>*</span></label>
+                                    <label>Tên khách hàng<span>*</span></label>
                                     <input type="text" name="fullname" placeholder="Enter full name"
                                         value="{{ old('full_name') }}">
                                     @error('full_name')
@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
-                                    <label>Email Address<span>*</span></label>
+                                    <label>Email<span>*</span></label>
                                     <input type="email" name="email" placeholder="Enter Email"
                                         value="{{ old('email') }}">
                                     @error('email')
@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
-                                    <label>Phone Number <span>*</span></label>
+                                    <label>Số điện thoại<span>*</span></label>
                                     <input type="number" name="phone" placeholder="Enter phone"
                                         value="{{ old('phone') }}">
                                     @error('phone')
@@ -64,7 +64,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
-                                    <label>Address<span>*</span></label>
+                                    <label>Địa chỉ<span>*</span></label>
                                     <input type="text" name="address" placeholder="Enter address"
                                         value="{{ old('address') }}">
                                     @error('address')
@@ -89,16 +89,15 @@
                                 }
                             @endphp
                             <div class="single-widget">
-                                <h2>CART TOTALS</h2>
+                                <h2>TỔNG GIỎ HÀNG</h2>
                                 <div class="content">
                                     <ul>
-                                        <li class="order_subtotal" data-price="{{ $sum }}">Cart
-                                            Subtotal<span>{{ number_format($total_amount, 0) }}đ</span></li>
+                                        <li class="order_subtotal" data-price="{{ $sum }}">Tổng tiền giỏ hàng<span>{{ number_format($total_amount, 0) }}đ</span></li>
                                         <li class="shipping">
-                                            Shipping Cost <span>Free</span>
+                                            Phí vận chuyển <span>Miễn phí</span>
                                         </li>
                                         <li class="last" id="order_total_price" name="total">
-                                            Total<span>{{ number_format($total_amount, 0) }}đ</span></li>
+                                            Tổng tiền<span>{{ number_format($total_amount, 0) }}đ</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -110,8 +109,7 @@
                                     <div class="checkbox">
                                         {{-- <label class="checkbox-inline" for="1"><input name="updates" id="1" type="checkbox"> Check Payments</label> --}}
                                         <form-group>
-                                            <input name="payment_method" type="radio" value="cod"> <label> Cash On
-                                                Delivery</label><br>
+                                            <input name="payment_method" type="radio" value="cod"> <label> Thanh toán khi nhận hàng</label><br>
                                             {{-- <input name="payment_method" type="radio" value="paypal"> <label>
                                                 PayPal</label>                                           --}}
                                         </form-group>
@@ -121,17 +119,17 @@
                             </div>
                             <!--/ End Order Widget -->
                             <!-- Payment Method Widget -->
-                            <div class="single-widget payement">
+                            {{-- <div class="single-widget payement">
                                 <div class="content">
                                     <img src="{{ asset('backend/img/payment-method.png') }}" alt="#">
                                 </div>
-                            </div>
+                            </div> --}}
                             <!--/ End Payment Method Widget -->
                             <!-- Button Widget -->
                             <div class="single-widget get-button">
                                 <div class="content">
                                     <div class="button">
-                                        <button type="submit" class="btn">proceed to checkout</button>
+                                        <button type="submit" class="btn">TIẾN HÀNH THANH TOÁN</button>
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +142,7 @@
                 @csrf
                 <input type="hidden" value="{{ $total_amount }}" name="total">
                  
-                <button class="btn" type="submit" name="payUrl">Payment momo</button>
+                <button class="btn" type="submit" name="payUrl">Thanh toán qua momo</button>
             </form>
         </div>
     </section>

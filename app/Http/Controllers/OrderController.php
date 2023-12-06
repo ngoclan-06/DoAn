@@ -210,7 +210,7 @@ class OrderController extends Controller
     {
         $order = order::find($id);
         $orderDetails = order_detail::where('order_id', $id)->get();
-        return view('backend.order.show', compact('order', 'orderDetails'));
+        return view('backend.order.show', compact('order', 'orderDetails'))->with('i');
     }
 
     public function pdf($id)

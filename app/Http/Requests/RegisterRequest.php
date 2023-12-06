@@ -26,9 +26,9 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email_address' => 'required|email|unique:users,email_address',
-            'password' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
+            'password' => 'required|string|min:6|regex:' . config('const.password_regex'),
+            'address' => 'nullable',
+            'phone' => 'nullable',
             'password_confirmation' => 'required|same:password',
         ];
     }
@@ -39,8 +39,8 @@ class RegisterRequest extends FormRequest
             'name.required' => 'Vui lòng nhập tên.',
             'email_address.required' => 'Vui lòng nhập email.',
             'password.required' => 'Vui lòng nhập password.',
-            'address.required' => 'Vui lòng nhập địa chỉ.',
-            'phone.required' => 'VUi lòng nhập SĐT.',
+            // 'address.required' => 'Vui lòng nhập địa chỉ.',
+            // 'phone.required' => 'VUi lòng nhập SĐT.',
             'unique' => 'Email này đã tồn tại. Vui lòng nhập lại!',
             'password_confirmation.required' => 'Vui lòng nhập password confirmation.',
             'same' => 'Không trùng khớp với password. Xin vui lòng nhập lại!'

@@ -36,13 +36,13 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-image"></i>
-            <span>Banners</span>
+            <span>Quản lý banners</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Lựa chọn:</h6>
-                <a class="collapse-item" href="{{ route('banner') }}">Banners</a>
-                <a class="collapse-item" href="{{ route('banner.create') }}">Add Banners</a>
+                <a class="collapse-item" href="{{ route('banner') }}">Danh sách banners</a>
+                <a class="collapse-item" href="{{ route('banner.create') }}">Thêm banners</a>
             </div>
         </div>
     </li>
@@ -56,7 +56,7 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#shippingCollapse"
             aria-expanded="true" aria-controls="shippingCollapse">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Tin tức</span>
+            <span>Quản lý tin tức</span>
         </a>
         <div id="shippingCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -71,7 +71,7 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#categoryCollapse"
             aria-expanded="true" aria-controls="categoryCollapse">
             <i class="fas fa-sitemap"></i>
-            <span>Loại bánh</span>
+            <span>Quản lý loại bánh</span>
         </a>
         <div id="categoryCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -85,13 +85,13 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#brandCollapse"
             aria-expanded="true" aria-controls="brandCollapse">
             <i class="fas fa-table"></i>
-            <span>Danh mục bánh</span>
+            <span>Quản lý danh mục sản phẩm</span>
         </a>
         <div id="brandCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Lựa chọn:</h6>
-                <a class="collapse-item" href="{{ route('subcategory') }}">Danh sách bánh</a>
-                <a class="collapse-item" href="{{ route('subcategory.create') }}">Thêm bánh</a>
+                <a class="collapse-item" href="{{ route('subcategory') }}">Danh sách danh mục sản phẩm</a>
+                <a class="collapse-item" href="{{ route('subcategory.create') }}">Thêm danh mục sản phẩm</a>
             </div>
         </div>
     </li>
@@ -100,7 +100,7 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#productCollapse"
             aria-expanded="true" aria-controls="productCollapse">
             <i class="fas fa-cubes"></i>
-            <span>Sản phẩm</span>
+            <span>Quản lý sản phẩm</span>
         </a>
         <div id="productCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -122,7 +122,7 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('order.index') }}">
             <i class="fas fa-hammer fa-chart-area"></i>
-            <span>Đơn hàng</span>
+            <span>Quản lý đơn hàng</span>
         </a>
     </li>
 
@@ -130,7 +130,7 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('products.review') }}">
             <i class="fas fa-comments"></i>
-            <span>Đánh giá</span>
+            <span>Quản lý đánh giá</span>
         </a>
     </li>
 
@@ -146,14 +146,14 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('comment.index') }}">
             <i class="fas fa-comments fa-chart-area"></i>
-            <span>Bình luận</span>
+            <span>Quản lý bình luận</span>
         </a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('coupon.index') }}">
             <i class="fas fa-table"></i>
-            <span>Mã giảm giá</span></a>
+            <span>Quản lý mã giảm giá</span></a>
     </li>
     <!-- Users -->
     @if (Auth()->user()->role == 2)
@@ -165,7 +165,7 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('users') }}">
                 <i class="fas fa-users"></i>
-                <span>Người dùng</span></a>
+                <span>Quản lý tài khoản</span></a>
         </li>
     @endif
     <!-- General settings -->

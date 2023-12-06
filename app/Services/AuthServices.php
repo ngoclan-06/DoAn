@@ -116,4 +116,17 @@ class AuthServices
 
         return true;
     }
+
+    public function registerAdmin(Request $request)
+    {
+        $user = User::create([
+            'name' => $request->name,
+            'email_address' => $request->email_address,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'role' => 2,
+        ]);
+
+        return $user;
+    }
 }

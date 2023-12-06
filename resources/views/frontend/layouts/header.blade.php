@@ -95,12 +95,12 @@
                 <div class="col-lg-8 col-md-7 col-12">
                     <div class="search-bar-top">
                         <div class="search-bar">
-                            <select>
+                            {{-- <select>
                                 <option>Loại bánh</option>
                                 @foreach ($category as $cat)
                                     <option>{{ $cat->name }}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                             <form method="POST" action="{{ route('product.search') }}">
                                 @csrf
                                 <input name="search" placeholder="Search Products Here....." type="search">

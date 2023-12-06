@@ -49,11 +49,6 @@ class FrontendController extends Controller
             return redirect('/login');
         }
 
-        // if (explode('@', $user->email_address)[1] !== 'company.com')
-        // {
-        //     return redirect()->to('/');
-        // }
-
         $existUser = User::where('email_address', $user->email)->first();
 
         if ($existUser) {

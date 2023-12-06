@@ -26,7 +26,7 @@
                         @csrf
                         <div class="form-group row">
                             <label for="current_password"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Current Password') }}</label>
+                                class="col-md-4 col-form-label text-md-right">{{ __('Mật khẩu cũ') }}</label>
 
                             <div class="col-md-6">
                                 <input id="current_password" type="password"
@@ -43,7 +43,7 @@
 
                         <div class="form-group row">
                             <label for="password"
-                                class="col-md-4 col-form-label text-md-right">{{ __('New Password') }}</label>
+                                class="col-md-4 col-form-label text-md-right">{{ __('Mật khẩu mới') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password"
@@ -60,7 +60,7 @@
 
                         <div class="form-group row">
                             <label for="password-confirm"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Password Confirmation') }}</label>
+                                class="col-md-4 col-form-label text-md-right">{{ __('Nhập lại mật khẩu mới') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password"
@@ -78,7 +78,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Update') }}
+                                    {{ __('Cập nhật') }}
                                 </button>
                             </div>
                         </div>

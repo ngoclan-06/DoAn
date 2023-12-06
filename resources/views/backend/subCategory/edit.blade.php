@@ -2,7 +2,7 @@
 
 @section('main-content')
     <div class="card">
-        <h5 class="card-header">SỬA THỂ LOẠI BÁNH</h5>
+        <h5 class="card-header">SỬA DANH MỤC SẢN PHẨM</h5>
         <div class="card-body">
             <form method="post" action="{{ route('subcategory.update', $subcategory->id) }}" enctype="multipart/form-data">
                 @csrf

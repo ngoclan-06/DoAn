@@ -9,8 +9,8 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Coupon List</h6>
-      <a href="{{route('coupon.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Coupon</a>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Danh sách mã giảm giá</h6>
+      <a href="{{route('coupon.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Tạo mã giảm giá</a>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -22,6 +22,7 @@
               <th>Mã giảm giá</th>
               <th>Kiểu</th>
               <th>Giá trị</th>
+              <th>Ngày hết hạn</th>
               <th>Trạng thái</th>
               <th style="width: 100px">Lựa chọn</th>
             </tr>
@@ -44,6 +45,7 @@
                         @else
                             {{$coupon->value}}%
                         @endif</td>
+                    <td>{{ $coupon->expired }}</td>
                     <td>
                         @if($coupon->status=='active')
                             <span class="badge badge-success">{{$coupon->status}}</span>

@@ -13,15 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('message_kh', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('subject');
-            $table->string('email');
-            $table->string('phone')->nullable();
+            $table->string('image')->nullable();
             $table->longText('message');
-            $table->timestamp('read_at')->nullable();
+            $table->timestamp('read_at');
+            $table->tinyInteger('status');
             $table->timestamps();
+            $table->softDeletes();
+
+             // declare foreign key
+            $table->foreignId('message_id')->nullable()
+            ->constrained('messages')
+            ->onDelete('cascade');
+
         });
     }
 
@@ -32,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('message_kh');
     }
 };

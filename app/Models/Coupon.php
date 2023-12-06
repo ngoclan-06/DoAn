@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coupon extends Model
 {
-    protected $fillable = ['code', 'type', 'value', 'status'];
+    protected $fillable = ['code', 'type', 'value', 'status', 'expired'];
 
     public static function findByCode($code)
     {

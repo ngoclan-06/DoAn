@@ -5,7 +5,7 @@
 @section('main-content')
 
 <div class="card">
-    <h5 class="card-header">Add Banner</h5>
+    <h5 class="card-header">Thêm banner</h5>
     <div class="card-body">
       <form method="post" action="{{route('banner.store')}}" enctype="multipart/form-data">
         {{csrf_field()}}

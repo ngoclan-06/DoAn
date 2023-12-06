@@ -33,6 +33,15 @@
             <span class="text-danger">{{$message}}</span>
             @enderror
         </div>
+
+        <div class="form-group">
+          <label for="expired" class="col-form-label">Ngày hết hạn<span class="text-danger">*</span></label>
+          <input id="expired" type="date" name="expired" placeholder="Nhập ngày hết hạn"
+              value="{{ old('expired') }}" class="form-control">
+          @error('expired')
+              <span class="text-danger">{{ $message }}</span>
+          @enderror
+      </div>
         
         <div class="form-group">
           <label for="status" class="col-form-label">Trạng thái<span class="text-danger">*</span></label>

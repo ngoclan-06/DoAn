@@ -17,6 +17,8 @@
                 data-placement="bottom" title="Add User"></i> Danh sách sản phẩm hết hạn</a>
             <a style="margin-left: 10px" href="{{ route('products.outofstock') }}" class="btn btn-primary btn-sm float-left"
                 data-toggle="tooltip" data-placement="bottom" title="Add User"></i> Danh sách sản phẩm hết hàng</a>
+            {{-- <a style="margin-left: 10px" href="{{ route('products.survive') }}" class="btn btn-primary btn-sm float-left"
+                data-toggle="tooltip" data-placement="bottom" title="Add User"></i> Danh sách hàng tồn</a> --}}
         </div>
         <div class="card-body">
             <div class="float-right" style="margin-bottom: 15px">
@@ -75,14 +77,14 @@
                                     <td>
                                         <a href="{{ route('products.edit', $product->id) }}"
                                             class="btn btn-primary btn-sm float-left mr-1"
-                                            style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip"
+                                            style="height:30px; width:30px;border-radius:50%; margin-left: -5px;" data-toggle="tooltip"
                                             title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
                                         <form method="POST" action="{{ route('products.delete', [$product->id]) }}">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm dltBtn" id="dltBtn"
                                                 data-id={{ $product->id }}
-                                                style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip"
+                                                style="height:30px; width:30px;border-radius:50%; margin-right: -5px;" data-toggle="tooltip"
                                                 data-placement="bottom" title="Delete"
                                                 onclick="return confirm('Bạn chắc chắn muốn xóa sản phẩm này không?')"><i
                                                     class="fas fa-trash-alt"></i></button>

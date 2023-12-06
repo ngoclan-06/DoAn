@@ -14,11 +14,13 @@ class User extends Authenticatable
 
     //role
     public const ROLE_CUSTOMER = 0;
-    public const ROLE_ADMIN_ROOT = 1;
+    public const ROLE_EMPLOYEE = 1;
+    public const ROLE_ADMIN_ROOT = 2;
 
     public static $roles = [
         self::ROLE_CUSTOMER => 'Khách hàng',
-        self::ROLE_ADMIN_ROOT => 'người quản trị',
+        self::ROLE_EMPLOYEE => 'Nhân viên',
+        self::ROLE_ADMIN_ROOT => 'Quản lý',
     ];
 
     /**
@@ -50,4 +52,15 @@ class User extends Authenticatable
         'updated_at',
         'deleted_at',
     ];
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    // Định nghĩa quan hệ một-nhiều với MessageKh
+    public function messageKhs()
+    {
+        return $this->hasMany(MessageKh::class);
+    }
 }

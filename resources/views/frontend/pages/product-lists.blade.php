@@ -163,7 +163,10 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 justify-content-center d-flex"></div>
-                            {{-- {{$products->links('pagination::bootstrap-4')}} --}}
+                            @if ($products instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                                {{ $products->appends(request()->query())->links('pagination::bootstrap-4') }}
+                            @endif
+
                         </div>
 
                     </div>

@@ -22,7 +22,7 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'address' => $this->faker->address(),
-            'password' => Hash::make('Aa@123456'),
+            // 'password' => Hash::make('Aa@123456'),
             // 'google_id' => $this->faker->address(),
             'email_address' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->numerify('0#########'),

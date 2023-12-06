@@ -102,4 +102,13 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Khôi phục thông tin tài khoản người dùng không thành công.');
         }
     }
+
+    public function searchUser(Request $request)
+    {
+        $users = User::orwhere('name', 'like', '%' . $request->search . '%')
+            ->orwhere('email_address', 'like', '%' . $request->search . '%')
+            ->orderBy('id', 'DESC')
+            ->paginate('9');
+        return view('backend.users.index', compact('users'))->with('i');
+    }
 }
