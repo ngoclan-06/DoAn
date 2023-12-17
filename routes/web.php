@@ -159,13 +159,13 @@ Route::prefix('auth')->group(function () {
             route::get('/message', 'index')->name('message.index');
             Route::post('/message/search', 'searchUser')->name('message.search');
             Route::get('/message/{id}', 'viewMessage')->name('message.view');
-            // Route::post('/chat/send', 'sendMessage')->name('message.sendMessage');
+            Route::post('/chat/send', 'sendMessage')->name('message.sendMessage');
 
-            // Route::get('/chat', 'showChat')->name('message.index');
+            Route::get('/chat', 'showChat')->name('message.index');
             Route::post('/chat/send', 'sendMessage')->name('message.sendMessage');
         });
         Route::controller(MessagesKHController::class)->middleware([config('const.auth.high'), config('const.auth.mid')])->group(function () {
-            route::get('/messagekh', 'index')->name('messagekh.index');
+            // route::get('/messagekh', 'index')->name('messagekh.index');
             // Route::get('/message/view/id', 'viewMessage')->name('message.view');
             // route::post('message', function (Request $request) {
             //     return $request->input('message');
@@ -173,12 +173,18 @@ Route::prefix('auth')->group(function () {
             // route::post('/message', 'store')->name('message');
             // route::get('/message/{id}', 'show')->name('message.show');
             // route::delete('/message-delete/{id}', 'delete')->name('message.delete');
+            // routes/web.php
+            Route::get('/chat', 'index')->name('chat.index');
+            Route::post('/chat', 'store')->name('chat.store');
+            Route::post('/chat/kh', 'storeKh')->name('chat.storeKh');
+
         });
     });
 });
 
+// Route::prefix('auth')->group(function () {
 Route::prefix('user')->group(function () {
-    // Route::middleware(['auth:sanctum'])->group(function () {
+    // Route::middleware(['user'])->group(function () {
         //khách hàng
         Route::controller(FrontendController::class)->group(function () {
             route::get('user-view_login', 'viewLogin')->name('user.view-login');
@@ -186,7 +192,7 @@ Route::prefix('user')->group(function () {
             route::get('user-logout', 'logout')->name('user.logout');
             route::get('user-view_register', 'viewRegister')->name('user.view-register');
             route::post('user-register', 'register')->name('user.register');
-
+        
             route::get('view_home', 'index')->name('home-user');
 
             route::get('/product_list', 'productList')->name('product-lists');

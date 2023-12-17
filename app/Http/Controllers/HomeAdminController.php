@@ -48,7 +48,8 @@ class HomeAdminController extends Controller
         $commentCounts = comments::selectRaw('blog_id, count(*) as count')
             ->groupBy('blog_id')
             ->pluck('count', 'blog_id');
-        $blogs = blog::all(); // lấy danh sách các blog
+        $blogs = blog::limit(3)
+        ->get(); // lấy danh sách các blog
         //bieu do
         $dailyRevenues = DB::table('order')
             ->where('status', 'delivered')

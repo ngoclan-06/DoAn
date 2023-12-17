@@ -1,10 +1,10 @@
-@extends('frontend.layouts.master')
+{{-- @extends('frontend.layouts.master') --}}
 
-@section('title', 'HaVyBakery || Login Page')
+{{-- @section('title', 'HaVyBakery || Login Page') --}}
 
-@section('main-content')
+{{-- @section('main-content') --}}
     <!-- Breadcrumbs -->
-    <div class="breadcrumbs">
+    {{-- <div class="breadcrumbs">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -17,9 +17,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- End Breadcrumbs -->
 
+    @include('frontend.layouts.head')	
     <!-- Shop Login -->
     <section class="shop login section">
         <div class="container">
@@ -57,10 +58,7 @@
                                         <button class="btn" type="submit">Đăng nhập</button>
                                         <a href="{{ route('user.view-register') }}" class="btn">Đăng ký</a>
                                         HOẶC
-                                        {{-- <a href="" class="btn btn-facebook"><i class="ti-facebook"></i></a> --}}
-                                        {{-- {{ URL::to('googleLogin') }} --}}
-                                        {{-- <a href="" class="btn btn-github"><i class="ti-github"></i></a> --}}
-                                        <a href="{{ route('google.login') }}" class="btn btn-google"><i class="ti-google"></i></a>
+                                        <a href="{{ route('google.login') }}" class="btn btn-google" style="background-color: #ea4335; color:#fff;"><i class="ti-google"></i></a>
 
                                     </div>
                                     <div class="checkbox">
@@ -82,7 +80,7 @@
         </div>
     </section>
     <!--/ End Login -->
-@endsection
+{{-- @endsection --}}
 @push('styles')
     <style>
         .shop.login .form .btn {

@@ -24,6 +24,9 @@ use App\Models\Coupon;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class FrontendController extends Controller
 {
@@ -68,10 +71,10 @@ class FrontendController extends Controller
 
     public function viewLogin()
     {
-        $carts = cart::get();
-        $wishlists = Wishlist::get();
-        $category = categories::where('status', 1)->get();
-        return view('frontend.pages.login', compact('category', 'carts', 'wishlists'));
+    //     $carts = cart::get();
+    //     $wishlists = Wishlist::get();
+    //     $category = categories::where('status', 1)->get();
+        return view('frontend.pages.login');
     }
 
     public function login(LoginRequest $request)
@@ -96,7 +99,8 @@ class FrontendController extends Controller
     }
     public function logout()
     {
-        $this->frontendServices->logout();
+        $user = auth()->user();
+        
         return redirect()->route('user.view-login');
     }
     public function viewRegister()
@@ -132,53 +136,60 @@ class FrontendController extends Controller
 
     public function productDetail($id)
     {
+        // $this->middleware('user'); // Sử dụng middleware
+        $user = Auth::user(); // Lấy thông tin người dùng đăng nhập
+
+        $carts = cart::where('user_id', $user?->id)->get(); // Lấy giỏ hàng của người dùng đăng nhập
+        $wishlists = Wishlist::where('user_id', $user?->id)->orderBy('id', 'DESC')->paginate(10); // Lấy danh sách yêu thích của người dùng đăng nhập
+        $category = categories::where('status', 1)->whereNull('deleted_at')->get();
         $now = now();
         $productDetail = products::where('id', $id)->first();
-        $category = categories::where('status', 1)->get();
         $subcate = sub_categories::where('status', 1)->where('id', $productDetail->sub_categories_id)->first()->name;
         $relatedProducts = products::where('sub_categories_id', $productDetail->sub_categories_id)
             ->where('id', '!=', $id)->limit(3)->get();
-        $carts = cart::all();
-        $wishlists = Wishlist::all();
         return view('frontend.pages.product_detail', compact('productDetail', 'category', 'subcate', 'relatedProducts', 'carts', 'wishlists'));
     }
 
     public function productList()
     {
+        // $this->middleware('user'); // Sử dụng middleware
+
+        $user = Auth::user();
         $now = now();
         $products = products::query()->where('expiry', '>', $now);
 
         if (!empty($_GET['category'])) {
             $slug = explode(',', $_GET['category']);
-            $cat_ids = sub_categories::select('id')->pluck('id')->toArray();
-            $products->whereIn('sub_categories_id', $cat_ids)->paginate;
+            $catIds = sub_categories::whereIn('slug', $slug)->pluck('id')->toArray();
+            $products->whereIn('sub_categories_id', $catIds);
         }
+
         if (!empty($_GET['sortBy'])) {
             if ($_GET['sortBy'] == 'name') {
-                $products = $products->where('status', '1')->orderBy('name', 'ASC');
+                $products->where('status', '1')->orderBy('name', 'ASC');
             }
             if ($_GET['sortBy'] == 'price') {
-                $products = $products->orderBy('price', 'ASC');
+                $products->orderBy('price', 'ASC');
             }
         }
 
         if (!empty($_GET['price'])) {
             $price = explode('-', $_GET['price']);
-
             $products->whereBetween('price', $price);
         }
 
-        $recent_products = products::where('status', '1')->whereNull('deleted_at')->orderBy('id', 'DESC')->limit(3)->get();
+        $recent_products = products::where('status', '1')->where('quantity', '>', 0)->whereNull('deleted_at')->orderBy('id', 'DESC')->limit(3)->get();
+
         // Sort by number
-        if (!empty($_GET['show'])) {
-            $products = $products->where('status', '1')->whereNull('deleted_at')->paginate($_GET['show']);
-        } else {
-            $products = $products->where('status', '1')->whereNull('deleted_at')->paginate(6);
-        }
+        $perPage = (!empty($_GET['show'])) ? $_GET['show'] : 6;
+        $products = $products->where('status', '1')->where('quantity', '>', 0)->whereNull('deleted_at')->paginate($perPage);
+
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
-        $carts = cart::all();
-        $wishlists = Wishlist::all();
+        $carts = cart::where('user_id', $user?->id)->get(); // Lấy giỏ hàng của người dùng đăng nhập
+        $wishlists = Wishlist::where('user_id', $user?->id)->get(); //
+
         return view('frontend.pages.product-lists', compact('products', 'recent_products', 'category', 'carts', 'wishlists'));
+
     }
 
     public function productGrid()
@@ -220,27 +231,40 @@ class FrontendController extends Controller
 
     public function productCate($cateId)
     {
-        $products = categories::find($cateId)->products->where('status', '1');
-        $recent_products = products::where('status', '1')->whereNull('deleted_at')->orderBy('id', 'DESC')->limit(3)->get();
+        // $this->middleware('user'); // Sử dụng middleware
 
+        $user = Auth::user(); // Lấy thông tin người dùng đăng nhập
+
+        $products = categories::find($cateId)
+            ->products()
+            ->where('status', '1')
+            ->where('quantity', '>', 0) // Thêm điều kiện lọc quantity > 0
+            ->get();
+    
+        $recent_products = products::where('status', '1')
+            ->whereNull('deleted_at')
+            ->where('quantity', '>', 0) // Thêm điều kiện lọc quantity > 0
+            ->orderBy('id', 'DESC')
+            ->limit(3)
+            ->get();
+    
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
-        $carts = cart::all();
-        $wishlists = Wishlist::all();
-        // if (request()->is('e-shop.loc/product-grids')) {
-        //     return view('frontend.pages.product-grids', compact('products', 'recent_products', 'category', 'carts', 'wishlists'));
-        // } else {
-            return view('frontend.pages.product-lists', compact('products', 'recent_products', 'category', 'carts', 'wishlists'));
-        // }
+        $carts = cart::where('user_id', $user?->id)->get();
+        $wishlists = Wishlist::where('user_id', $user?->id)->get();
+    
+        return view('frontend.pages.product-lists', compact('products', 'recent_products', 'category', 'carts', 'wishlists'));
     }
 
     public function productSubCate($subCateId)
     {
-        $products = sub_categories::find($subCateId)->products->where('status', '1');
-        $recent_products = products::where('status', '1')->whereNull('deleted_at')->orderBy('id', 'DESC')->limit(3)->get();
+        // $this->middleware('user'); // Sử dụng middleware
+        $user = Auth::user(); // Lấy thông tin người dùng đăng nhập
 
+        $carts = cart::where('user_id', $user?->id)->get(); // Lấy giỏ hàng của người dùng đăng nhập
+        $wishlists = Wishlist::where('user_id', $user?->id)->orderBy('id', 'DESC')->paginate(10); // Lấy danh sách yêu thích của người dùng đăng nhập
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
-        $carts = cart::all();
-        $wishlists = Wishlist::all();
+        $products = sub_categories::find($subCateId)->products->where('status', '1')->where('quantity', '>', 0);
+        $recent_products = products::where('status', '1')->where('quantity', '>', 0)->whereNull('deleted_at')->orderBy('id', 'DESC')->limit(3)->get();
         // if (request()->is('e-shop.loc/product-grids')) {
         //     return view('frontend.pages.product-grids', compact('products', 'recent_products', 'category', 'carts', 'wishlists'));
         // } else {
@@ -261,7 +285,6 @@ class FrontendController extends Controller
             $sortByURL .= '&sortBy=' . $data['sortBy'];
         }
 
-
         $priceRangeURL = "";
         if (!empty($data['price_range'])) {
             $priceRangeURL .= '&price=' . $data['price_range'];
@@ -275,8 +298,14 @@ class FrontendController extends Controller
 
     public function productSearch(Request $request)
     {
-        $recent_products = products::where('status', '1')->orderBy('id', 'DESC')->whereNull('deleted_at')->limit(3)->get();
-        $products = products::where('status', 1)
+        // $this->middleware('user'); // Sử dụng middleware
+        $user = Auth::user(); // Lấy thông tin người dùng đăng nhập
+
+        $carts = cart::where('user_id', $user?->id)->get(); // Lấy giỏ hàng của người dùng đăng nhập
+        $wishlists = Wishlist::where('user_id', $user?->id)->orderBy('id', 'DESC')->paginate(10); // Lấy danh sách yêu thích của người dùng đăng nhập
+        $category = categories::where('status', 1)->whereNull('deleted_at')->get();
+        $recent_products = products::where('status', '1')->where('quantity', '>', 0)->orderBy('id', 'DESC')->whereNull('deleted_at')->limit(3)->get();
+        $products = products::where('status', 1)->where('quantity', '>', 0)
             ->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('description', 'like', '%' . $request->search . '%')
@@ -285,16 +314,16 @@ class FrontendController extends Controller
             ->orderBy('id', 'DESC')
             ->whereNull('deleted_at')
             ->paginate(9);
-        $category = categories::where('status', 1)->whereNull('deleted_at')->get();
-        $carts = cart::all();
-        $wishlists = Wishlist::all();
         return view('frontend.pages.product-lists', compact('products', 'recent_products', 'category', 'carts', 'wishlists'));
     }
 
     public function orderIndex()
     {
-        $carts = cart::all();
-        $wishlists = Wishlist::all();
+        // $this->middleware('user'); // Sử dụng middleware
+        $user = Auth::user(); // Lấy thông tin người dùng đăng nhập
+
+        $carts = cart::where('user_id', $user?->id)->get(); // Lấy giỏ hàng của người dùng đăng nhập
+        $wishlists = Wishlist::where('user_id', $user?->id)->orderBy('id', 'DESC')->paginate(10); // Lấy danh sách yêu thích của người dùng đăng nhập
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
         $orders = order::orderByDesc('id')->where('user_id', Auth()->user()->id)->whereNull('deleted_at')->get();
         $orderDetails = [];
@@ -312,20 +341,26 @@ class FrontendController extends Controller
 
     public function blog()
     {
+        // $this->middleware('user'); // Sử dụng middleware
+        $user = Auth::user();
+
         $blogs = blog::where('status', 1)->whereNull('deleted_at')->paginate(10);
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
-        $carts = cart::all();
-        $wishlists = Wishlist::all();
+        $carts = cart::where('user_id', $user?->id)->get();
+        $wishlists = Wishlist::where('user_id', $user?->id)->orderBy('id', 'DESC')->paginate(10);
         $recent_blogs = blog::orderBy('id', 'DESC')->where('status', 1)->whereNull('deleted_at')->limit(3)->get();
         return view('frontend.pages.blog', compact('blogs', 'category', 'recent_blogs', 'carts', 'wishlists'));
     }
 
     public function blogDetail($id)
     {
+        // $this->middleware('user'); // Sử dụng middleware
+        $user = Auth::user();
+
         $blog = blog::find($id);
         $comments = comments::where('blog_id', $blog->id)->where('status', 'active')->paginate(10);
-        $carts = cart::all();
-        $wishlists = Wishlist::all();
+        $carts = cart::where('user_id', $user?->id)->get();
+        $wishlists = Wishlist::where('user_id', $user?->id)->orderBy('id', 'DESC')->paginate(10);
         $recent_blogs = blog::orderBy('id', 'DESC')->where('status', 1)->whereNull('deleted_at')->limit(3)->get();
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
         return view('frontend.pages.blog-detail', compact('blog', 'category', 'comments', 'recent_blogs', 'carts', 'wishlists'));
@@ -340,9 +375,13 @@ class FrontendController extends Controller
     }
     public function aboutUs()
     {
-        $carts = cart::all();
-        $wishlists = Wishlist::all();
+        // $this->middleware('user'); // Sử dụng middleware
+        $user = Auth::user(); // Lấy thông tin người dùng đăng nhập
+
+        $carts = cart::where('user_id', $user?->id)->get(); // Lấy giỏ hàng của người dùng đăng nhập
+        $wishlists = Wishlist::where('user_id', $user?->id)->orderBy('id', 'DESC')->paginate(10); // Lấy danh sách yêu thích của người dùng đăng nhập
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
+
         return view('frontend.pages.about-us', compact('category', 'carts', 'wishlists'));
     }
 
@@ -366,9 +405,10 @@ class FrontendController extends Controller
 
     public function profile()
     {
+        // $this->middleware('user');
         $profile = Auth()->user();
-        $carts = cart::all();
-        $wishlists = Wishlist::all();
+        $carts = cart::where('user_id', $profile->id)->get();
+        $wishlists = Wishlist::where('user_id', $profile->id)->orderBy('id', 'DESC')->paginate(10);
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
         return view('frontend.pages.profiles', compact('profile', 'category', 'carts', 'wishlists'));
     }
@@ -388,8 +428,12 @@ class FrontendController extends Controller
 
     public function userChangePassword()
     {
-        $carts = cart::all();
-        $wishlists = Wishlist::all();
+        // $this->middleware('user'); // Sử dụng middleware
+
+        $user = Auth::user(); // Lấy thông tin người dùng đăng nhập
+
+        $carts = cart::where('user_id', $user?->id)->get(); // Lấy giỏ hàng của người dùng đăng nhập
+        $wishlists = Wishlist::where('user_id', $user?->id)->orderBy('id', 'DESC')->paginate(10); // Lấy danh sách yêu thích của người dùng đăng nhập
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
         return view('frontend.pages.changepassword', compact('category', 'carts', 'wishlists'));
     }

@@ -104,9 +104,9 @@
                                         </div>
                                         <div class="add-to-cart mt-4">
                                             @if ($productDetail->quantity > 0)
-                                                <a title="Add to cart" class="btn" href="{{ route('add-to-cart', $productDetail->id) }}">Thêm vào giỏ hàng</a>
+                                                <a title="Thêm vào giỏ hàng" class="btn" href="{{ route('add-to-cart', $productDetail->id) }}">Thêm vào giỏ hàng</a>
                                             @else
-                                            <a style="pointer-events: none;" title="Add to cart" class="btn" href="{{ route('add-to-cart', $productDetail->id) }}">Thêm vào giỏ hàng</a>
+                                            <a style="pointer-events: none;" title="Thêm vào giỏ hàng" class="btn" href="{{ route('add-to-cart', $productDetail->id) }}">Thêm vào giỏ hàng</a>
                                             @endif
                                             <a href="" class="btn min"><i class="ti-heart"></i></a>
                                         </div>
@@ -325,15 +325,14 @@
                                     </a>
                                     <div class="button-head">
                                         <div class="product-action">
-                                            <a data-toggle="modal" data-target="#modelExample" title="Quick View"
-                                                href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                            <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to
-                                                    Wishlist</span></a>
+                                            {{-- <a data-toggle="modal" data-target="#modelExample" title="Quick View"
+                                                href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a> --}}
+                                            <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Thêm vào danh sách yêu thích</span></a>
                                             <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add
                                                     to Compare</span></a>
                                         </div>
                                         <div class="product-action-2">
-                                            <a title="Add to cart" href="{{ route('add-to-cart', $data->id) }}">Add to cart</a>
+                                            <a title="Thêm vào giỏ hàng" href="{{ route('add-to-cart', $data->id) }}">Thêm vào giỏ hàng</a>
                                         </div>
                                     </div>
                                 </div>

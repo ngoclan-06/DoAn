@@ -20,7 +20,7 @@
                             {{-- <li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li> --}}
 
                             @if (Auth()->user())
-                                <li><i class="ti-location-pin"></i> <a href="{{ route('user.order') }}">Đặt hàng</a></li>
+                                {{-- <li><i class="ti-location-pin"></i> <a href="{{ route('user.order') }}">Đặt hàng</a></li> --}}
                                 <li><i class="ti-user"></i> <a href="{{ route('home-user') }}"
                                         target="_blank">Trang chủ</a></li>
                                 {{-- <li><i class="ti-power-off"></i> <a href="{{ route('user.logout') }}">Logout</a></li> --}}
@@ -83,7 +83,7 @@
                         <!-- Search Form -->
                         <div class="search-top">
                             <form class="search-form">
-                                <input type="text" placeholder="Search here..." name="search">
+                                <input type="text" placeholder="Tìm kiếm" name="search">
                                 <button value="search" type="submit"><i class="ti-search"></i></button>
                             </form>
                         </div>
@@ -103,7 +103,7 @@
                             </select> --}}
                             <form method="POST" action="{{ route('product.search') }}">
                                 @csrf
-                                <input name="search" placeholder="Search Products Here....." type="search">
+                                <input name="search" placeholder="Tìm kiếm sản phẩm" type="search">
                                 <button class="btnn" type="submit"><i class="ti-search"></i></button>
                             </form>
                         </div>
@@ -235,8 +235,7 @@
                                             <li class=""><a href="{{ route('home-user') }}">Trang chủ</a></li>
                                             <li class=""><a href="{{ route('aboutUs') }}">Giới thiệu</a></li>
                                             <li class=""><a
-                                                    href="{{ route('product-lists') }}">Sản phẩm</a><span
-                                                    class="new">New</span></li>
+                                                    href="{{ route('product-lists') }}">Sản phẩm</a></li>
                                             {{-- <li class=""><a>Category</a>
                                                 <ul lass="categor-list">
                                                     @foreach ($category as $cat)
@@ -250,7 +249,7 @@
                                                 </ul>
                                             </li> --}}
                                             <li class=""><a href="{{ route('blog.list') }}">Tin tức</a></li>
-                                            <li class=""><a href="{{ route('contact') }}">Liên hệ</a></li>
+                                            {{-- <li class=""><a href="{{ route('contact') }}">Liên hệ</a></li> --}}
                                         </ul>
                                     </div>
                                 </div>

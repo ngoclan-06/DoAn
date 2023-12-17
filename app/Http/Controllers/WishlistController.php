@@ -7,6 +7,7 @@ use App\Models\categories;
 use App\Models\products;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WishlistController extends Controller
 {
@@ -18,10 +19,19 @@ class WishlistController extends Controller
 
     public function index()
     {
-        $wishlists = Wishlist::orderBy('id', 'DESC')->paginate(10);
+        $this->middleware('user'); // Sử dụng middleware
+
+        $user = Auth::user(); // Lấy thông tin người dùng đăng nhập
+
+        $wishlists = Wishlist::where('user_id', $user->id)->orderBy('id', 'DESC')->paginate(10); // Lấy danh sách yêu thích của người dùng đăng nhập
         $category = categories::where('status', 1)->get();
-        $carts = cart::all();
+        $carts = cart::where('user_id', $user->id)->get(); // Lấy giỏ hàng của người dùng đăng nhập
+
         return view('frontend.pages.wishlist', compact('wishlists', 'category', 'carts'))->with('i');
+        // $wishlists = Wishlist::orderBy('id', 'DESC')->paginate(10);
+        // $category = categories::where('status', 1)->get();
+        // $carts = cart::all();
+        // return view('frontend.pages.wishlist', compact('wishlists', 'category', 'carts'))->with('i');
     }
     public function addWishlist(Request $request)
     {

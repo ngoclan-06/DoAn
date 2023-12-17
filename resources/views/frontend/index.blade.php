@@ -129,19 +129,19 @@
                                                 </a>
                                                 <div class="button-head">
                                                     <div class="product-action">
-                                                        <a data-toggle="modal" data-target="#{{ $product->id }}"
+                                                        {{-- <a data-toggle="modal" data-target="#{{ $product->id }}"
                                                             title="Quick View" href="#"><i
-                                                                class=" ti-eye"></i><span>Quick Shop</span></a>
+                                                                class=" ti-eye"></i><span>Quick Shop</span></a> --}}
                                                         <a title="Wishlist"
                                                             href="{{ route('add-to-wishlist', $product->id) }}"><i
                                                                 class=" ti-heart "></i><span>Thêm vào danh sách yêu thích</span></a>
                                                     </div>
                                                     <div class="product-action-2">
                                                         @if ($product->quantity > 0)
-                                                            <a title="Add to cart"
+                                                            <a title="Thêm vào giỏ hàng"
                                                                 href="{{ route('add-to-cart', $product->id) }}">Thêm vào giỏ hàng</a>
                                                         @else
-                                                            <a style="pointer-events: none;" title="Add to cart"
+                                                            <a style="pointer-events: none;" title="Thêm vào giỏ hàng"
                                                                 href="{{ route('add-to-cart', $product->id) }}">Thêm vào giỏ hàng</a>
                                                         @endif
                                                     </div>
@@ -169,7 +169,7 @@
         </div>
     </div>
     <!-- Start Most Popular -->
-    <div class="product-area most-popular section">
+    {{-- <div class="product-area most-popular section">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -192,7 +192,7 @@
                                                 style="width: 255px; height: 200px">
                                             <img class="hover-img" src="{{ asset('image/product/' . $product->image) }}"
                                                 alt="">
-                                            {{-- <span class="out-of-stock">Hot</span> --}}
+                                            {{-- <span class="out-of-stock">Hot</span> --}
                                         </a>
                                         <div class="button-head">
                                             <div class="product-action">
@@ -201,10 +201,10 @@
                                                         Shop</span></a>
                                                 <a title="Wishlist"
                                                     href="{{ route('add-to-wishlist', $product->id) }}"><i
-                                                        class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                                        class=" ti-heart "></i><span>Thêm vào danh sách yêu thích</span></a>
                                             </div>
                                             <div class="product-action-2">
-                                                <a href="{{ route('add-to-cart', $product->id) }}">Add to cart</a>
+                                                <a href="{{ route('add-to-cart', $product->id) }}">Thêm vào giỏ hàng</a>
                                             </div>
                                         </div>
                                     </div>
@@ -224,7 +224,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- End Most Popular Area -->
 
     <!-- Start Shop Home List  -->
@@ -256,7 +256,7 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-12">
                                             <div class="list-image overlay">
-                                                <img src="{{ asset('image/product/' . $product->image) }}"
+                                                <img src="{{ asset('image/product/' . $product->image) }}" style="height:200px;width:200px;"
                                                     alt="{{ $product->image }}">
                                             </div>
                                         </div>
@@ -303,7 +303,7 @@
                                     <p class="date">{{ $blog->created_at->format('d M , Y. D') }}</p>
                                     <a href="{{ route('blog.detail', $blog->id) }}"
                                         class="title">{{ $blog->name }}</a>
-                                    <a href="{{ route('blog.detail', $blog->id) }}" class="more-btn">Continue Reading</a>
+                                    <a href="{{ route('blog.detail', $blog->id) }}" class="more-btn">Đọc tin tức</a>
                                 </div>
                             </div>
                             <!-- End Single Blog  -->
@@ -363,12 +363,12 @@
 @endsection
 
 @push('styles')
-    <script type='text/javascript'
+    {{-- <script type='text/javascript'
         src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons'
         async='async'></script>
     <script type='text/javascript'
         src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons'
-        async='async'></script>
+        async='async'></script> --}}
     <style>
         /* Banner Sliding */
         #Gslider .carousel-inner {

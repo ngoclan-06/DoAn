@@ -25,7 +25,7 @@
                 <div class="stylish-input-group">
                   <form method="POST" action="{{ route('message.search') }}">
                       @csrf
-                      <input name="search" placeholder="Search Products Here" type="search">
+                      <input name="search" placeholder="Tìm kiếm sản phẩm" type="search">
                       <span class="input-group-addon">
                           <button type="search" name="search"> <i class="fa fa-search" aria-hidden="true"></i> </button>
                           </span> </div>
@@ -43,7 +43,7 @@
                       @endif
                       <div class="content">
                           <h6>
-                              <a href="{{ route('message.view', ['id' => $message->user->id]) }}">
+                              <a href="{{ route('message.view', ['id' => $message->id]) }}">
                                   {{ $message->user->name }}
                               </a>
                               <span>At {{ $message->created_at->format('g: i a') }} On
@@ -54,27 +54,6 @@
               @endforeach
           </div>          
           </div>
-
-          @foreach ($messagekh as $messagekh)
-            <div class="incoming_msg">
-                <div class="incoming_msg_img"> 
-                    @if ($messagekh->message->user->image)
-                        <img src="{{ asset('image/user/' . $messagekh->message->user->image) }}" alt="#">
-                    @else
-                        <img src="{{ asset('backend/img/avatar.png') }}" alt="">
-                    @endif
-                </div>
-                <div class="received_msg">
-                    <div class="received_withd_msg">
-                        <p>{{ $messagekh->message->message }}</p>
-                        <span class="time_date">
-                            At {{ $messagekh->message->created_at->format('g:i A') }} | {{ $messagekh->message->created_at->format('F d') }}
-                        </span>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-
 
           <div class="mesgs">
             <div class="msg_history">
@@ -87,6 +66,15 @@
                       {{ $message->created_at->format('M') }}</span></div>
                   </div>
                @endforeach
+
+               @foreach ($messageKh as $messageKh)
+               <div class="received_msg">
+                 <div class="received_withd_msg">
+                   <p>{{ $messageKh->message }}</p>
+                   <span>At {{ $messageKh->created_at->format('g: i a') }} On
+                     {{ $messageKh->created_at->format('M') }}</span></div>
+                 </div>
+              @endforeach
             </div>
 
             <div class="type_msg">

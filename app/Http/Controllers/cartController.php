@@ -7,6 +7,7 @@ use App\Models\cart;
 use App\Models\categories;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class cartController extends Controller
 {
@@ -18,39 +19,90 @@ class cartController extends Controller
 
     public function index()
     {
-        $carts = cart::orderBy('id', 'DESC')->paginate(10);
+        $this->middleware('user'); // Sử dụng middleware
+
+        $user = Auth::user(); // Lấy thông tin người dùng đăng nhập
+
+        $carts = cart::where('user_id', $user->id)->orderBy('id', 'DESC')->paginate(10); // Lấy giỏ hàng của người dùng đăng nhập
         $category = categories::where('status', 1)->get();
-        $wishlists = Wishlist::all();
+        $wishlists = Wishlist::where('user_id', $user->id)->get(); // Lấy danh sách yêu thích của người dùng đăng nhập
+
         return view('frontend.pages.cart', compact('carts', 'category', 'wishlists'))->with('i');
+        // $carts = cart::orderBy('id', 'DESC')->paginate(10);
+        // $category = categories::where('status', 1)->get();
+        // $wishlists = Wishlist::all();
+        // return view('frontend.pages.cart', compact('carts', 'category', 'wishlists'))->with('i');
     }
 
     public function addToCart(Request $request)
     {
+        // if (empty($request->id)) {
+        //     return back()->with('error', 'Đã xảy ra lỗi! Sản phẩm không hợp lệ.');
+        // }
+        // $product = products::where('id', $request->id)->first();
+        // if (empty($product)) {
+        //     return back()->with('error', 'Đã xảy ra lỗi! Sản phẩm không hợp lệ.');
+        // }
+        // $already_cart = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->where('product_id', $product->id)->first();
+        // if ($already_cart) {
+        //     $already_cart->quantity = $already_cart->quantity + 1;
+        //     $already_cart->amount = $product->price + $already_cart->amount;
+        //     if ($already_cart->product->quantity < $already_cart->quantity || $already_cart->product->quantity <= 0) return back()->with('error', 'Stock not sufficient!.');
+        //     $already_cart->save();
+        // } else {
+
+        //     $cart = new Cart;
+        //     $cart->user_id = auth()->user()->id;
+        //     $cart->product_id = $product->id;
+        //     $cart->price = $product->price;
+        //     $cart->quantity = 1;
+        //     $cart->amount = $cart->price * $cart->quantity;
+        //     if ($cart->product->quantity < $cart->quantity || $cart->product->quantity <= 0) return back()->with('error', 'Stock not sufficient!.');
+        //     $cart->save();
+        //     //$wishlist = Wishlist::where('user_id', auth()->user()->id)->where('cart_id', null)->update(['cart_id' => $cart->id]);
+        // }
+        // return back()->with('success', 'Thêm vào giỏ hàng thành công.');
         if (empty($request->id)) {
             return back()->with('error', 'Đã xảy ra lỗi! Sản phẩm không hợp lệ.');
         }
+    
         $product = products::where('id', $request->id)->first();
+    
         if (empty($product)) {
             return back()->with('error', 'Đã xảy ra lỗi! Sản phẩm không hợp lệ.');
         }
-        $already_cart = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->where('product_id', $product->id)->first();
+    
+        $quantityToAdd = $request->has('quantity') ? intval($request->quantity) : 1;
+    
+        $already_cart = Cart::where('user_id', auth()->user()->id)
+            ->where('order_id', null)
+            ->where('product_id', $product->id)
+            ->first();
+    
         if ($already_cart) {
-            $already_cart->quantity = $already_cart->quantity + 1;
-            $already_cart->amount = $product->price + $already_cart->amount;
-            if ($already_cart->product->quantity < $already_cart->quantity || $already_cart->product->quantity <= 0) return back()->with('error', 'Stock not sufficient!.');
+            $already_cart->quantity += $quantityToAdd;
+            $already_cart->amount = $product->price * $already_cart->quantity;
+    
+            if ($already_cart->product->quantity < $already_cart->quantity || $already_cart->product->quantity <= 0) {
+                return back()->with('error', 'Số lượng không đủ trong kho!');
+            }
+    
             $already_cart->save();
         } else {
-
             $cart = new Cart;
             $cart->user_id = auth()->user()->id;
             $cart->product_id = $product->id;
             $cart->price = $product->price;
-            $cart->quantity = 1;
+            $cart->quantity = $quantityToAdd;
             $cart->amount = $cart->price * $cart->quantity;
-            if ($cart->product->quantity < $cart->quantity || $cart->product->quantity <= 0) return back()->with('error', 'Stock not sufficient!.');
+    
+            if ($cart->product->quantity < $cart->quantity || $cart->product->quantity <= 0) {
+                return back()->with('error', 'Số lượng không đủ trong kho!');
+            }
+    
             $cart->save();
-            //$wishlist = Wishlist::where('user_id', auth()->user()->id)->where('cart_id', null)->update(['cart_id' => $cart->id]);
         }
+    
         return back()->with('success', 'Thêm vào giỏ hàng thành công.');
     }
 
@@ -94,9 +146,11 @@ class cartController extends Controller
 
     public function checkout()
     {
-        $carts = cart::get();
-        $wishlists = Wishlist::get();
-        $category = categories::where('status', 1)->get();
+        $user = Auth::user(); // Lấy thông tin người dùng đăng nhập
+
+        $carts = cart::where('user_id', $user?->id)->get(); // Lấy giỏ hàng của người dùng đăng nhập
+        $wishlists = Wishlist::where('user_id', $user?->id)->orderBy('id', 'DESC')->paginate(10); // Lấy danh sách yêu thích của người dùng đăng nhập
+        $category = categories::where('status', 1)->whereNull('deleted_at')->get();
         return view('frontend.pages.checkout', compact('carts', 'category', 'wishlists'));
     }
 }

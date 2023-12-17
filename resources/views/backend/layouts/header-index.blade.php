@@ -36,7 +36,7 @@
             ]);
 
             var options = {
-                title: 'Revenue Chart',
+                title: 'Doanh thu',
                 curveType: 'function',
                 legend: {
                     position: 'bottom'

@@ -18,7 +18,7 @@
                         @if ($dep)
                             <div class="button">
                                 <a href="#" class="btn btn-reply reply" data-id="{{ $comment->id }}"><i
-                                        class="fa fa-reply" aria-hidden="true"></i>Reply</a>
+                                        class="fa fa-reply" aria-hidden="true"></i>Trả lời</a>
                                 <a href="" class="btn btn-reply cancel" style="display: none;"><i
                                         class="fa fa-trash" aria-hidden="true"></i>Cancel</a>
                             </div>

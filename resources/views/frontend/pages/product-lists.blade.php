@@ -97,9 +97,9 @@
                                 <div class="shop-top">
                                     <div class="shop-shorter">
                                         <div class="single-shorter">
-                                            <label>Show :</label>
+                                            <label>Hiển thị:</label>
                                             <select class="show" name="show" onchange="this.form.submit();">
-                                                <option value="">Default</option>
+                                                <option value="">Mặc định</option>
                                                 <option value="9" @if(!empty($_GET['show']) && $_GET['show']=='9') selected @endif>09</option>
                                                 <option value="15" @if(!empty($_GET['show']) && $_GET['show']=='15') selected @endif>15</option>
                                                 <option value="21" @if(!empty($_GET['show']) && $_GET['show']=='21') selected @endif>21</option>
@@ -107,11 +107,11 @@
                                             </select>
                                         </div>
                                         <div class="single-shorter">
-                                            <label>Sort By :</label>
+                                            <label>Sắp xếp:</label>
                                             <select class='sortBy' name='sortBy' onchange="this.form.submit();">
-                                                <option value="">Default</option>
-                                                <option value="name" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='name') selected @endif>Name</option>
-                                                <option value="price" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='price') selected @endif>Price</option>             
+                                                <option value="">Mặc định</option>
+                                                <option value="name" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='name') selected @endif>Tên</option>
+                                                <option value="price" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='price') selected @endif>Giá</option>             
                                             </select>
                                         </div>
                                     </div>
@@ -131,22 +131,20 @@
                                         <div class="single-product">
                                             <div class="product-img">
                                                 <a href="{{ route('product-detail', $product->id) }}">
-                                                    <img src="{{ asset('image/product/' . $product->image) }}"
+                                                    <img src="{{ asset('image/product/' . $product->image) }}" style="height:250px;width:250px;"
                                                         alt="{{ $product->image }}">
                                                 </a>
                                                 <div class="button-head">
                                                     <div class="product-action">
-                                                        <a data-toggle="modal" data-target="#{{ $product->id }}"
+                                                        {{-- <a data-toggle="modal" data-target="#{{ $product->id }}"
                                                             title="Quick View" href="#"><i
-                                                                class=" ti-eye"></i><span>Quick Shop</span></a>
+                                                                class=" ti-eye"></i><span>Quick Shop</span></a> --}}
                                                         <a title="Wishlist" href="{{ route('add-to-wishlist', $product->id) }}" class="wishlist"
                                                             data-id="{{ $product->id }}"><i
-                                                                class=" ti-heart "></i><span>Add to
-                                                                Wishlist</span></a>
+                                                                class=" ti-heart "></i><span>Thêm vào danh sách yêu thích</span></a>
                                                     </div>
                                                     <div class="product-action-2">
-                                                        <a title="Add to cart" href="{{ route('add-to-cart', $product->id) }}">Add
-                                                            to cart</a>
+                                                        <a title="Thêm vào giỏ hàng" href="{{ route('add-to-cart', $product->id) }}">Thêm vào giỏ hàng</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -158,7 +156,7 @@
                                     </div>
                                 @endforeach
                             @else
-                                    <h4 class="text-warning" style="margin:100px auto;">There are no products.</h4>
+                                    <h4 class="text-warning" style="margin:100px auto;">Không có sản phẩm nào.</h4>
                             @endif
                         </div>
                         <div class="row">
@@ -258,14 +256,21 @@
                                                 <!--/ End Input Order -->
                                             </div>
                                             <div class="add-to-cart">
-                                                <button type="submit" class="btn">Add to cart</button>
+                                                <button type="submit" class="btn">Thêm vào giỏ hàng</button>
                                                 <a href="" class="btn min"><i class="ti-heart"></i></a>
+                                                {{-- @if ($productDetail->quantity > 0)
+                                                <a title="Thêm vào giỏ hàng" class="btn" href="{{ route('add-to-cart', $productDetail->id) }}">Thêm vào giỏ hàng</a>
+                                                @else
+                                                <a style="pointer-events: none;" title="Thêm vào giỏ hàng" class="btn" href="{{ route('add-to-cart', $productDetail->id) }}">Thêm vào giỏ hàng</a>
+                                                @endif
+                                                <a href="" class="btn min"><i class="ti-heart"></i></a> --}}
+                                                {{-- <a title="Thêm vào giỏ hàng" href="{{ route('add-to-cart', $product->id) }}">Thêm vào giỏ hàng</a> --}}
                                             </div>
                                         </form>
-                                        <div class="default-social">
+                                        {{-- <div class="default-social">
                                             <!-- ShareThis BEGIN -->
                                             <div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>

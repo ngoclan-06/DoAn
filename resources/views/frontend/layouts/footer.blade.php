@@ -1,10 +1,15 @@
+<div id="myMap">
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1215.8010851354031!2d105.40230166619125!3d21.41675274424668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313493543a013d51%3A0x2358ee15561af259!2sH%C3%A0%20Vy%20Bakery!5e0!3m2!1svi!2s!4v1692121509831!5m2!1svi!2s" 
+        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
 <!-- Start Footer Area -->
 <footer class="footer">
     <!-- Footer Top -->
     <div class="footer-top section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-md-6 col-12">
+                <div class="col-lg-6 col-md-2 col-10">
                     <!-- Single Widget -->
                     <div class="single-footer about">
                         <div class="logo">
@@ -14,75 +19,26 @@
                     </div>
                     <!-- End Single Widget -->
                 </div>
-                <div class="col-lg-2 col-md-6 col-12">
+                <div class="col-lg-6 col-md-2 col-10">
                     <!-- Single Widget -->
                     <div class="single-footer links">
-                        <h4>Information</h4>
-                        <ul>
-                            <li><a href="">About Us</a></li>
-                            <li><a href="#">Faq</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
-                            <li><a href="">Contact Us</a></li>
-                            <li><a href="#">Help</a></li>
-                        </ul>
+                        <h4>Thông tin liên hệ</h4>
+                            <div class="single-head">
+                                <div class="single-info">
+                                    <i class="fa fa-phone" style="color:#fff;"> <h4 class="title" style="float:right; margin-left:15px;">Liên hệ: 0978084301</h4> </i>
+                                </div>
+                                <div class="single-info">
+                                    <i class="fa fa-envelope-open" style="color:#fff;"><h4 class="title" style="float:right; margin-left:15px;">Email: <a href="mailto:info@yourwebsite.com" style="text-transform: lowercase;">hangoclan1710@gmail.com</a></h4></i>
+                                </div>
+                                <div class="single-info">
+                                    <i class="fa fa-location-arrow" style="color:#fff;"><h4 class="title" style="float:right; margin-left:15px;">Địa chỉ: Thị trấn Tam Sơn - Sông Lô -Vĩnh Phúc</h4></i>
+                                </div>
+                            </div>
                     </div>
-                    <!-- End Single Widget -->
-                </div>
-                <div class="col-lg-2 col-md-6 col-12">
-                    <!-- Single Widget -->
-                    <div class="single-footer links">
-                        <h4>Customer Service</h4>
-                        <ul>
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Money-back</a></li>
-                            <li><a href="#">Returns</a></li>
-                            <li><a href="#">Shipping</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                        </ul>
-                    </div>
-                    <!-- End Single Widget -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Single Widget -->
-                    <div class="single-footer social">
-                        <h4>Get In Tuch</h4>
-                        <!-- Single Widget -->
-                        <div class="contact">
-                            <ul>
-                                {{-- <li>@foreach ($settings as $data) {{$data->address}} @endforeach</li>
-									<li>@foreach ($settings as $data) {{$data->email}} @endforeach</li>
-									<li>@foreach ($settings as $data) {{$data->phone}} @endforeach</li> --}}
-                            </ul>
-                        </div>
-                        <!-- End Single Widget -->
-                        <div class="sharethis-inline-follow-buttons"></div>
-                    </div>
-                    <!-- End Single Widget -->
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Footer Top -->
-    {{-- <div class="copyright">
-        <div class="container">
-            <div class="inner">
-                <div class="row">
-                    <div class="col-lg-6 col-12">
-                        <div class="left">
-                            <p>Copyright © {{ date('Y') }} <a href="https://github.com/Prajwal100"
-                                    target="_blank">Prajwal Rai</a> - All Rights Reserved.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-12">
-                        <div class="right">
-                            <img src="{{ asset('backend/img/payments.png') }}" alt="#">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-</footer>
 <!-- /End Footer Area -->
 
 <!-- Jquery -->
@@ -148,3 +104,17 @@
         });
     });
 </script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6579c66d70c9f2407f7f7839/1hhhqu7j3';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->

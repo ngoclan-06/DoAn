@@ -15,6 +15,7 @@ use PDF;
 use App\Models\categories;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
 {
@@ -63,24 +64,37 @@ class OrderController extends Controller
         ]);
         //create order
         $order = order::create([
+            // 'status' => 'new',
+            // 'total' => $cart->totalCartPrice(),
+            // 'date' => now(),
+            // 'fullname' => 'Hà Thị Ngọc Lan',
+            // 'email' => 'hangoclan1710@gmail.com',
+            // 'address' => 'Vĩnh Phúc',
+            // 'phone' => '0985479172',
+            // 'user_id' => Auth()->user()->id,
+            // 'payment_id' => $payment->id,
+
             'status' => 'new',
             'total' => $cart->totalCartPrice(),
-            // 'date' => now(),
-            'fullname' => 'Hà Thị Ngọc Lan',
-            'email' => 'hangoclan1710@gmail.com',
-            'address' => 'Vĩnh Phúc',
-            'phone' => '0985479172',
+            'date' => now(),
+            'fullname' => Auth()->user()->name,
+            'email' => Auth()->user()->email_address,
+            'address' => Auth()->user()->address,
+            'phone' => Auth()->user()->phone,
             'user_id' => Auth()->user()->id,
             'payment_id' => $payment->id,
         ]);
         //create order detail
         foreach ($cart->getAllCart() as $product) {
-            $orderDetail = order_detail::create([
-                'price' => $product->price,
-                'quantity' => $product->quantity,
-                'products_id' => $product->product_id,
-                'order_id' => $order->id,
-            ]);
+            // Kiểm tra nếu sản phẩm thuộc người dùng đăng nhập
+            if ($product->user_id == Auth()->user()->id) {
+                $orderDetail = order_detail::create([
+                    'price' => $product->price,
+                    'quantity' => $product->quantity,
+                    'products_id' => $product->product_id,
+                    'order_id' => $order->id,
+                ]);
+            }
         }
         //send mail
         $user = $order->user;
@@ -143,11 +157,32 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+        $rules = [
+            'fullname' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+        ];
+    
+        // Custom validation messages
+        $messages = [
+            'fullname.required' => 'Vui lòng nhập họ tên.',
+            'email.required' => 'Vui lòng nhập địa chỉ email.',
+            'email.email' => 'Địa chỉ email không hợp lệ.',
+            'address.required' => 'Vui lòng nhập địa chỉ.',
+            'phone.required' => 'Vui lòng nhập số điện thoại.',
+        ];
+    
+        // Validate the request
+        $request->validate($rules, $messages);
+    
         if (empty(Cart::where('user_id', auth()->user()->id)->where('order_id', null)->first())) {
             return back()->with('error', 'Đã xảy ra lỗi! Giỏ hàng của bạn đang rỗng.');
         }
+    
         $cart = new cart();
-        //create payment
+    
+        // Tạo thanh toán
         if ($request->payment_method == 'paypal') {
             $payment_method = 'paypal';
             $payment_status = 'paid';
@@ -155,14 +190,17 @@ class OrderController extends Controller
             $payment_method = 'cod';
             $payment_status = 'Unpaid';
         }
+    
         $payment = payment::create([
             'payment_method' => $payment_method,
             'payment_status' => $payment_status,
         ]);
-        //create order
+    
+        // Tạo đơn hàng
         $order = order::create([
             'status' => 'new',
             'total' => $cart->totalCartPrice(),
+            'date' => now(),
             'fullname' => $request->fullname,
             'email' => $request->email,
             'address' => $request->address,
@@ -170,36 +208,39 @@ class OrderController extends Controller
             'user_id' => Auth()->user()->id,
             'payment_id' => $payment->id,
         ]);
-        //create order detail
+    
+        // Tạo chi tiết đơn hàng
         foreach ($cart->getAllCart() as $product) {
-            $orderDetail = order_detail::create([
-                'price' => $product->price,
-                'quantity' => $product->quantity,
-                'products_id' => $product->product_id,
-                'order_id' => $order->id,
-            ]);
+            // Kiểm tra nếu sản phẩm thuộc người dùng đăng nhập
+            if ($product->user_id == Auth()->user()->id) {
+                $orderDetail = order_detail::create([
+                    'price' => $product->price,
+                    'quantity' => $product->quantity,
+                    'products_id' => $product->product_id,
+                    'order_id' => $order->id,
+                ]);
+            }
         }
-        //send mail
+    
+        // Gửi email
         $user = $order->user;
-        $orderDetails = order_detail::where('order_id', $order->id)->get();
-        // if (request('payment_method') == 'paypal') {
-        //     $carts = cart::get();
-        //     $wishlists = Wishlist::get();
-        //     $category = categories::where('status', 1)->get();
-        //     return view('frontend.payment.checkout', compact('category', 'wishlists', 'carts'));
-        // }
+        $orderDetails = order_detail::where('order_id', $order->id)->get(); // Lấy ra chi tiết đơn hàng
         Mail::send('frontend.mail.order-confirmation', compact('user', 'order', 'orderDetails'), function ($message) use ($user) {
             $message->to($user->email_address, $user->name);
             $message->subject('Order Confirmation');
         });
-
+    
+        // Xóa giỏ hàng
         cart::where('user_id', Auth()->user()->id)->delete();
-        foreach ($order->order_detail as $orderDetail) {
+    
+        // Giảm số lượng sản phẩm trong kho
+        foreach ($orderDetails as $orderDetail) {
             $product = products::find($orderDetail->products_id);
             $product->quantity -= $orderDetail->quantity;
             $product->save();
         }
-        return redirect()->route('home-user')->with('success', 'Bạn đã đặt hành thành công.');
+    
+        return redirect()->route('home-user')->with('success', 'Bạn đã đặt hàng thành công.');
     }
     public function index()
     {

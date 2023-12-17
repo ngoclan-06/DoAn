@@ -25,7 +25,7 @@
         .form-box{
             position: relative;
             width: 400px;
-            height: 476px;
+            height: 500px;
             background: transparent;
             border: 2px solid rgba(255, 255, 255, 1.5);
             border-radius: 20px;
@@ -36,6 +36,11 @@
         }
         h2{
             font-size: 4em;
+            color: #fff;
+            text-align: center;
+        }
+        h4{
+            font-size: 2em;
             color: #fff;
             text-align: center;
         }
@@ -140,65 +145,67 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+                        <h4>ĐĂNG KÝ</h4>
+                        <div class="inputbox">
+                            <ion-icon name="name-outline"></ion-icon>
+                            <input type="name" name="name" @error('name') is-invalid @enderror value="{{ old('name') }}" required>
+                            <label for="">Tên</label>
+                            @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
+                        <div class="inputbox">
+                            <ion-icon name="mail-outline"></ion-icon>
+                            <input type="email" name="email_address" @error('email_address') is-invalid @enderror value="{{ old('email_address') }}" required>
+                            <label for="">Email</label>
+                            @error('email_address')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
+    
+                        <div class="inputbox">
+                            <ion-icon name="lock-closed-outline"></ion-icon>
+                            <input type="password" name="password" @error('password') is-invalid @enderror value="{{ old('password') }}" required>
+                            <label for="">Mật khẩu</label>
+                            @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
+                        <div class="inputbox">
+                            <ion-icon name="lock-closed-outline"></ion-icon>
+                            <input type="password" name="password_confirmation" @error('password_confirmation') is-invalid @enderror value="{{ old('password_confirmation') }}" required>
+                            <label for="">Mật khẩu nhập lại</label>
+                            @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
+                        <button class="btn btn-primary" type="submit" name="submit">Register</button>
+                        <a href="{{route('view-login')}}" style="margin-left:127px; color:#fff; margin-top:3px;">Đăng nhập</a>
+                        {{ csrf_field() }}
                     </form>
+                    @if (isset($errors))
+                    <p style="color:rgb(255, 0, 0); font-size: 8.5px;">
+                        @foreach ($errors->all() as $error)
+                            {!! $error !!}<br/>
+                        @endforeach
+                    </p>
+                    @endif
+                    @if (isset($message))
+                        <p style="color:rgb(72, 0, 255);">
+                            {{ $message }}
+                        </p>
+                    @endif 
                 </div>
             </div> 
             </div>

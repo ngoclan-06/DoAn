@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+
 class AuthServices
 {
     // function login
@@ -122,8 +124,7 @@ class AuthServices
         $user = User::create([
             'name' => $request->name,
             'email_address' => $request->email_address,
-            'phone' => $request->phone,
-            'address' => $request->address,
+            'password' => Hash::make($request->password),
             'role' => 2,
         ]);
 

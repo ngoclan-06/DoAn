@@ -36,20 +36,14 @@
                                 <div class="form-group">
                                     <label>Tên khách hàng<span>*</span></label>
                                     <input type="text" name="fullname" placeholder="Enter full name"
-                                        value="{{ old('full_name') }}">
-                                    @error('full_name')
-                                        <span class='text-danger'>{{ $message }}</span>
-                                    @enderror
+                                        value="{{ Auth()->user()->name }}" disabled style="background-color: #d2cece;">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>Email<span>*</span></label>
                                     <input type="email" name="email" placeholder="Enter Email"
-                                        value="{{ old('email') }}">
-                                    @error('email')
-                                        <span class='text-danger'>{{ $message }}</span>
-                                    @enderror
+                                        value="{{ Auth()->user()->email_address }}" disabled style="background-color: #d2cece;">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
@@ -104,7 +98,7 @@
                             <!--/ End Order Widget -->
                             <!-- Order Widget -->
                             <div class="single-widget">
-                                <h2>Payments</h2>
+                                <h2>Thanh toán</h2>
                                 <div class="content">
                                     <div class="checkbox">
                                         {{-- <label class="checkbox-inline" for="1"><input name="updates" id="1" type="checkbox"> Check Payments</label> --}}
@@ -117,14 +111,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--/ End Order Widget -->
-                            <!-- Payment Method Widget -->
-                            {{-- <div class="single-widget payement">
-                                <div class="content">
-                                    <img src="{{ asset('backend/img/payment-method.png') }}" alt="#">
-                                </div>
-                            </div> --}}
-                            <!--/ End Payment Method Widget -->
                             <!-- Button Widget -->
                             <div class="single-widget get-button">
                                 <div class="content">

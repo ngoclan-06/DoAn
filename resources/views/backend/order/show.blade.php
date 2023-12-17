@@ -98,11 +98,11 @@
                                         <table class="table">
                                             <tr>
                                                 <td>Ảnh</td>
-                                                <td> : <img width="100px" src="{{ asset('image/product/'. $item->products->image) }}" ></td>
+                                                <td> : <img width="100px" src="{{ asset('image/product/'. $item->products?->image) }}" ></td>
                                             </tr>
                                             <tr>
                                                 <td>Tên</td>
-                                                <td> : {{ $item->products->name }}</td>
+                                                <td> : {{ $item->products?->name }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Số lượng</td>

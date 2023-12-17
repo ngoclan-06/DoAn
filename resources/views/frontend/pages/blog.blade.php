@@ -11,7 +11,7 @@
                     <div class="bread-inner">
                         <ul class="bread-list">
                             <li><a href="{{route('home')}}">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="javascript:void(0);">Blog Grid Sidebar</a></li>
+                            <li class="active"><a href="javascript:void(0);">Tin tức</a></li>
                         </ul>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                                             </span>
                                         </p>
                                         <a href="{{route('blog.detail',$blog->id)}}" class="title">{{$blog->name}}</a>
-                                        <a href="{{route('blog.detail',$blog->id)}}" class="more-btn">Continue Reading</a>
+                                        <a href="{{route('blog.detail',$blog->id)}}" class="more-btn">Đọc tin tức</a>
                                     </div>
                                 </div>
                                 <!-- End Single Blog  -->
@@ -58,7 +58,7 @@
                         <!-- Single Widget -->
                         <div class="single-widget search">
                             <form class="form" method="GET" action="">
-                                <input type="text" placeholder="Search Here..." name="search">
+                                <input type="text" placeholder="Tìm kiếm name="search">
                                 <button class="button" type="sumbit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -66,7 +66,7 @@
                      
                         <!-- Single Widget -->
                         <div class="single-widget recent-post">
-                            <h3 class="title">Recent post</h3>
+                            <h3 class="title">Tin tức gần đây</h3>
                             @foreach($recent_blogs as $blog)
                                 <!-- Single Post -->
                                 <div class="single-post">

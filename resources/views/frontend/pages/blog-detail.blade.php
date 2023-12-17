@@ -11,7 +11,7 @@
                     <div class="bread-inner">
                         <ul class="bread-list">
                             <li><a href="{{ route('home-user') }}">Trang chủ<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="javascript:void(0);">Blog Single Sidebar</a></li>
+                            <li class="active"><a href="javascript:void(0);">Chi tiết tin tức</a></li>
                         </ul>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                                                     class="fa fa-calendar"></i>{{ $blog->created_at->format('M d, Y') }}</a><a
                                                 href="javascript:void(0);"></span>
                                     </div>
-                                    <div class="sharethis-inline-reaction-buttons"></div>
+                                    {{-- <div class="sharethis-inline-reaction-buttons"></div> --}}
                                     <div class="content">
                                         <p>{!! $blog->content !!}</p>
                                     </div>
@@ -50,7 +50,7 @@
                             <div class="col-12 mt-4" style="width: 800px">
                                 <div class="reply">
                                     <div class="reply-head comment-form" id="commentFormContainer">
-                                        <h2 class="reply-title">Leave a Comment</h2>
+                                        <h2 class="reply-title">Bình luận</h2>
                                         <!-- Comment Form -->
                                         <form class="form comment_form" id="commentForm"
                                             action="{{ route('comment', $blog->id) }}" method="POST">
@@ -58,7 +58,7 @@
                                             <div class="row">                                              
                                                 <div class="col-12">
                                                     <div class="form-group  comment_form_body">
-                                                        <label>Your Message<span>*</span></label>
+                                                        <label>Viết bình luận<span>*</span></label>
                                                         <textarea name="comment" id="comment" rows="10" placeholder=""></textarea>
                                                         <input type="hidden" name="blog_id" value="{{ $blog->id }}" />
                                                         <input type="hidden" name="parent_id" id="parent_id" value="" />
@@ -67,9 +67,9 @@
                                                 <div class="col-12">
                                                     <div class="form-group button">
                                                         <button type="submit" class="btn"><span
-                                                                class="comment_btn comment">Post Comment</span><span
-                                                                class="comment_btn reply" style="display: none;">Reply
-                                                                Comment</span></button>
+                                                                class="comment_btn comment">Đăng</span><span
+                                                                class="comment_btn reply" style="display: none;">Trả lời
+                                                                Bình luận</span></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -106,7 +106,7 @@
                         <!-- Single Widget -->
                         <div class="single-widget search">
                             <form class="form" method="GET" action="">
-                                <input type="text" placeholder="Search Here..." name="search">
+                                <input type="text" placeholder="Tìm kiếm" name="search">
                                 <button class="button" type="sumbit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -114,7 +114,7 @@
                         <!-- Single Widget -->
                         <!-- Single Widget -->
                         <div class="single-widget recent-post">
-                            <h3 class="title">Recent post</h3>
+                            <h3 class="title">Tin tức gần đây</h3>
                             @foreach ($recent_blogs as $blog)
                                 <!-- Single Post -->
                                 <div class="single-post">
@@ -149,7 +149,7 @@
 @endsection
 @push('styles')
     <script type='text/javascript'
-        src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons'
+        {{-- src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons' --}}
         async='async'></script>
 @endpush
 @push('scripts')

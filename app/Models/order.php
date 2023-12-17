@@ -20,7 +20,8 @@ class order extends Model
         'fullname',
         'address',
         'phone',
-        'email'
+        'email',
+        'date'
     ];
 
     protected $dates = [
