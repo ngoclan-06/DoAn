@@ -11,6 +11,7 @@
                             <li><a href="{{ 'home-user' }}">Trang chủ<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="">Giỏ hàng</a></li>
                         </ul>
+                        <a href="{{ route('historyOrder') }}" class="btn" style="color: #f6f6f6; margin-left: 10px;">Đơn hàng đã đặt</a>
                     </div>
                 </div>
             </div>
@@ -97,7 +98,7 @@
                                     @else
                                         <tr>
                                             <td class="text-center">
-                                                Không có sản phẩm nào trong giỏ hàng <a href="{{ route('product-grids') }}"
+                                                Không có sản phẩm nào trong giỏ hàng <a href="{{ route('product-lists') }}"
                                                     style="color:blue;">Tiếp tục xem sản phẩm</a>
                                             </td>
                                         </tr>
@@ -137,7 +138,7 @@
                                             <li class="order_subtotal" data-price="">Tổng tiền giỏ hàng<span>{{ number_format($sum, 0) }}đ</span></li>
                                             @if (session()->has('coupon'))
                                                 <li class="coupon_price"
-                                                    data-price="{{ Session::get('coupon')['value'] }}">Bạn cần thanh toán<span>-{{ number_format(Session::get('coupon')['value'], 0) }}đ</span>
+                                                    data-price="{{ Session::get('coupon')['value'] }}">Giảm<span>-{{ number_format(Session::get('coupon')['value'], 0) }}đ</span>
                                                 </li>
                                             @endif
                                             @php
@@ -145,18 +146,19 @@
                                                 if (session()->has('coupon')) {
                                                     $total_amount = $total_amount - Session::get('coupon')['value'];
                                                 }
+                                                session()->forget('coupon')
                                             @endphp
                                             @if (session()->has('coupon'))
-                                                <li class="last" id="order_total_price">You
-                                                    Pay<span>{{ number_format($total_amount, 0) }}đ</span></li>
+                                                <li class="last" id="order_total_price">Bạn cần thanh toán<span>{{ number_format($total_amount, 0) }}đ</span></li>
+                                                @php session()->forget('coupon') @endphp
                                             @else
-                                                <li class="last" id="order_total_price">You
-                                                    Pay<span>{{ number_format($total_amount, 0) }}đ</span></li>
+                                                <li class="last" id="order_total_price">Bạn cần thanh toán<span>{{ number_format($total_amount, 0) }}đ</span></li>
+                                                    @php session()->forget('coupon') @endphp
                                             @endif
                                         </ul>
                                         <div class="button5">
                                             <a href="{{ route('checkout') }}" class="btn">Thanh toán</a>
-                                            <a href="{{ route('product-grids') }}" class="btn">Tiếp tục xem sản phẩm</a>
+                                            <a href="{{ route('product-lists') }}" class="btn">Tiếp tục xem sản phẩm</a>
                                         </div>
                                     </div>
                                 </div>
@@ -167,7 +169,7 @@
                 </div>
             </div>
         @else
-            <span style="margin-left: 280px; font-size: 20px">No products found in cart!!! Please add Product to cart.
+            <span style="margin-left: 280px; font-size: 20px">Không có sản phẩm nào trong giỏ hàng.
                 <a href="{{ route('product-grids') }}" class="btn">shopping</a>
             </span>
         @endif

@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>tên khách hàng:<span>*</span></label>
+                                        <label>Tên khách hàng:<span>*</span></label>
                                         <input type="text" name="name" placeholder="Enter your name" value="{{old('name')}}">
                                         @error('name')
                                             <span class="text-danger">{{$message}}</span>

@@ -214,6 +214,7 @@
                                 @endauth
                                 <!--/ End Shopping Item -->
                             </div>
+                            {{-- <a href="{{ route('historyOrder') }}" class="single-icon">Đơn hàng đã đặt</a> --}}
                         </div>
                     </div>
                 @endif

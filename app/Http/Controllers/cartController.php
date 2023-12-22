@@ -36,7 +36,15 @@ class cartController extends Controller
 
     public function addToCart(Request $request)
     {
-        // $this->middleware('checkLogin.role');
+                // $this->middleware('checkLogin.role');
+        // if (empty(auth()->user()->id == null)) {
+        //     return view('frontend.pages.login');
+        // }
+        $user = Auth()->user();
+        if (!$user) {
+            // Xử lý khi người dùng chưa đăng nhập, ví dụ chuyển hướng đến trang đăng nhập
+            return redirect()->route('user.view-login')->with('error', 'Vui lòng đăng nhập để xem lịch sử đơn hàng.');
+        }
         if (empty($request->id)) {
             return back()->with('error', 'Đã xảy ra lỗi! Sản phẩm không hợp lệ.');
         }

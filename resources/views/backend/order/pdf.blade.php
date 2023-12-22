@@ -95,7 +95,8 @@
         </style>
         <div class="invoice-description">
             <div class="invoice-left-top float-left">
-                <h6>Gửi đến</h6>
+                {{-- <h6>Gửi đến</h6> --}}
+                <strong>Gửi đến</strong>
                 <p style="font-size: 20px; font-weight: bold;">
                     {{ $order->fullname }}
                 </p>
@@ -109,14 +110,16 @@
                 </div>
             </div>
             <div class="invoice-right-top float-right" class="text-right">
-                <h3>Hóa đơn #{{ $order->id }}</h3>
+                {{-- <h3>Hóa đơn #{{ $order->id }}</h3> --}}
+                <strong>Hóa đơn #{{ $order->id }}</strong>
                 <p>{{ $order->created_at->format('D d m Y') }}</p>
             </div>
             <div class="clearfix"></div>
         </div>
         <section class="order_details pt-3">
             <div class="table-header">
-                <h5>Chi tiết đơn hàng</h5>
+                {{-- <h5>Chi tiết đơn hàng</h5> --}}
+                <strong>Chi tiết đơn hàng</strong>
             </div>
             <table class="table table-bordered table-stripe">
                 <thead>
@@ -144,11 +147,13 @@
             </table>
         </section>
         <div class="thanks mt-3">
-            <h4>Thank you for your business !!</h4>
+            {{-- <h4>Cảm ơn bạn đã mua hàng !!</h4> --}}
+            <strong>Cảm ơn bạn đã mua hàng !!</strong>
         </div>
         <div class="authority float-right mt-5">
             <p>-----------------------------------</p>
-            <h5>Authority Signature:</h5>
+            {{-- <h5>Chữ ký của của hàng</h5> --}}
+            <strong>Chữ ký của của hàng</strong>
         </div>
         <div class="clearfix"></div>
     @else

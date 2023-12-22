@@ -61,7 +61,7 @@
                                 @endif
                                 <div class="content">
                                     <h3>{{ $cat->name }}</h3>
-                                    <a href="{{ route('product-category', $cat->id) }}">Discover Now</a>
+                                    {{-- <a href="{{ route('product-category', $cat->id) }}">Discover Now</a> --}}
                                 </div>
                             </div>
                         </div>

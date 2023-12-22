@@ -36,14 +36,14 @@
                                 <div class="form-group">
                                     <label>Tên khách hàng<span>*</span></label>
                                     <input type="text" name="fullname" placeholder="Enter full name"
-                                        value="{{ Auth()->user()->name }}" disabled style="background-color: #d2cece;">
+                                        value="{{ old('name') }}">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>Email<span>*</span></label>
                                     <input type="email" name="email" placeholder="Enter Email"
-                                        value="{{ Auth()->user()->email_address }}" disabled style="background-color: #d2cece;">
+                                        value="{{ old('email') }}">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">

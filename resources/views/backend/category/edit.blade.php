@@ -8,7 +8,7 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <label class="col-form-label">tên loại bánh<span class="text-danger">*</span></label>
+                    <label class="col-form-label">Tên loại bánh<span class="text-danger">*</span></label>
                     <input  type="text" name="name" placeholder="Enter name"
                         value="{{ $category->name }}" class="form-control">
                     @error('name')

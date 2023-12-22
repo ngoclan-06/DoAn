@@ -11,7 +11,7 @@ class payment extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'payment';
     protected $fillable = [
-        'method',
-        'status',
+        'payment_method',
+        'payment_status',
     ];
 }

@@ -18,7 +18,7 @@
           <thead>
             <tr style="text-align: center">
               <th>STT</th>
-              <th>tên</th>
+              <th>Tên</th>
               <th>Email</th>
               <th>Tổng cộng</th>
               <th>Ngày</th>
@@ -36,14 +36,20 @@
                     <td>{{ $order->created_at->format('D d M, Y') }}</td>
                     <td>
                         @if($order->status=='new')
-                          <span class="badge badge-primary">{{$order->status}}</span>
+                          <span class="badge badge-primary">Mới</span>
                         @elseif($order->status=='process')
-                          <span class="badge badge-warning">{{$order->status}}</span>
+                          <span class="badge badge-warning">Đang giao</span>
                         @elseif($order->status=='delivered')
-                          <span class="badge badge-success">{{$order->status}}</span>
+                          <span class="badge badge-success">Đã giao hàng</span>
                         @else
-                          <span class="badge badge-danger">{{$order->status}}</span>
+                          <span class="badge badge-danger">Giao thành công</span>
                         @endif
+
+                        {{-- @if ($product->status == 1)
+                            <span class="badge badge-success">Còn bán</span>
+                        @else
+                            <span class="badge badge-warning">Không còn bán</span>
+                        @endif --}}
                     </td>
                     <td>
                         <a href="{{ route('order.show',$order->id) }}" class="btn btn-warning btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="view" data-placement="bottom"><i class="fas fa-eye"></i></a>

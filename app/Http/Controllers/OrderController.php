@@ -44,24 +44,17 @@ class OrderController extends Controller
 
     public function momo(Request $request)
     {
-        // dd($request);
-        // $carts = cart::where('user_id', Auth()->user()->id)->get();
-        // // dd($carts);
-        // foreach ($carts as $item) {
-        //     $product = products::find($item->product_id);
-        //     $product->quantity -= $item->quantity;
-        //     $product->save();
-        //     $item->delete();
-        // }
         if (empty(Cart::where('user_id', auth()->user()->id)->where('order_id', null)->first())) {
             return back()->with('error', 'Đã xảy ra lỗi! Giỏ hàng của bạn đang rỗng.');
         }
         $cart = new cart();
         //create payment
         $payment = payment::create([
-            'payment_method' => 'Momo',
+            'payment_method' => 'paypal',
             'payment_status' => 'paid',
         ]);
+        // dd($payment);
+        // die();
         //create order
         $order = order::create([
             // 'status' => 'new',
@@ -100,10 +93,6 @@ class OrderController extends Controller
         $user = $order->user;
         $orderDetails = order_detail::where('order_id', $order->id)->get();
         
-        // Mail::send('frontend.mail.order-confirmation', compact('user', 'order', 'orderDetails'), function ($message) use ($user) {
-        //     $message->to($user->email_address, $user->name);
-        //     $message->subject('Order Confirmation');
-        // });
 
         cart::where('user_id', Auth()->user()->id)->delete();
         foreach ($order->order_detail as $orderDetail) {
@@ -126,8 +115,6 @@ class OrderController extends Controller
 
         $requestId = time() . "";
         $requestType = "payWithATM";
-        // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-        //before sign HMAC SHA256 signature
         $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
         $signature = hash_hmac("sha256", $rawHash, $secretKey);
         $data = array(
@@ -153,10 +140,12 @@ class OrderController extends Controller
         return redirect()->to($jsonResult['payUrl']);
 
         // header('Location: ' . $jsonResult['payUrl']);
+        die();
     }
 
     public function store(Request $request)
     {
+       
         $rules = [
             'fullname' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -172,10 +161,12 @@ class OrderController extends Controller
             'address.required' => 'Vui lòng nhập địa chỉ.',
             'phone.required' => 'Vui lòng nhập số điện thoại.',
         ];
-    
+        
         // Validate the request
         $request->validate($rules, $messages);
-    
+        
+        // dd('oke');
+        // die();
         if (empty(Cart::where('user_id', auth()->user()->id)->where('order_id', null)->first())) {
             return back()->with('error', 'Đã xảy ra lỗi! Giỏ hàng của bạn đang rỗng.');
         }
@@ -195,6 +186,7 @@ class OrderController extends Controller
             'payment_method' => $payment_method,
             'payment_status' => $payment_status,
         ]);
+        
     
         // Tạo đơn hàng
         $order = order::create([
@@ -242,6 +234,7 @@ class OrderController extends Controller
     
         return redirect()->route('home-user')->with('success', 'Bạn đã đặt hàng thành công.');
     }
+
     public function index()
     {
         $orders = Order::orderBy('id', 'DESC')->paginate(10);

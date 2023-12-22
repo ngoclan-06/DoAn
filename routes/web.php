@@ -58,18 +58,25 @@ Route::prefix('auth')->group(function () {
         route::post('register', 'registerAdmin')->name('register');
     });
 
-    Route::middleware(['auth:sanctum'])->group(function () {
-        route::controller(auth\ChangePassword::class)->middleware([config('const.auth.high'), config('const.auth.mid')])->group(function () {
+    // route::controller(auth\ChangePassword::class)->group(function () {
+    //     //change password
+    //     Route::get('/view_change_password', 'viewChangePassword')->name('view-change-password');
+    //     Route::post('/change_password', 'changePassword')->name('change-password');
+    // });
+});
+
+    Route::prefix('admin')->group(function () {
+        route::controller(auth\ChangePassword::class)->middleware('checkLogin.role')->group(function () {
             //change password
             Route::get('/view_change_password', 'viewChangePassword')->name('view-change-password');
             Route::post('/change_password', 'changePassword')->name('change-password');
         });
-        Route::controller(HomeAdminController::class)->middleware([config('const.auth.high'), config('const.auth.mid')])->group(function () {
+        Route::controller(HomeAdminController::class)->middleware('checkLogin.role')->group(function () {
             route::get('/home', 'index')->name('home');
             route::get('/admin-profile', 'profile')->name('admin.profile');
             route::put('/admin-profile/{id}', 'updateProfile')->name('admin.update.profile');
         });
-        Route::controller(UserController::class)->middleware([config('const.auth.high')])->group(function () {
+        Route::controller(UserController::class)->middleware('checkLogin.role')->group(function () {
             Route::get('/user', 'index')->name('users');
             Route::get('/user-create', 'create')->name('users.create');
             route::post('/user-store', 'store')->name('users.store');
@@ -81,7 +88,7 @@ Route::prefix('auth')->group(function () {
             Route::patch('users/{id}/restore', 'restore')->name('users.restore');
             Route::post('/user/search', 'searchUser')->name('users.search');
         });
-        Route::controller(BannerController::class)->middleware([config('const.auth.high'), config('const.auth.mid')])->group(function () {
+        Route::controller(BannerController::class)->middleware('checkLogin.role')->group(function () {
             route::get('/banner', 'index')->name('banner');
             Route::get('/banner-create', 'create')->name('banner.create');
             route::post('/banner-store', 'store')->name('banner.store');
@@ -89,7 +96,7 @@ Route::prefix('auth')->group(function () {
             route::put('/banner-update/{id}', 'update')->name('banner.update');
             route::delete('/banner-delete/{id}', 'delete')->name('banner.delete');
         });
-        Route::controller(CategoryController::class)->middleware([config('const.auth.high'), config('const.auth.mid')])->group(function () {
+        Route::controller(CategoryController::class)->middleware('checkLogin.role')->group(function () {
             route::get('/category', 'index')->name('category');
             Route::get('/category-create', 'create')->name('category.create');
             route::post('/category-store', 'store')->name('category.store');
@@ -97,7 +104,7 @@ Route::prefix('auth')->group(function () {
             route::put('/category-update/{id}', 'update')->name('category.update');
             route::delete('/category-delete/{id}', 'delete')->name('category.delete');
         });
-        Route::controller(SubCategoryController::class)->middleware([config('const.auth.high'), config('const.auth.mid')])->group(function () {
+        Route::controller(SubCategoryController::class)->middleware('checkLogin.role')->group(function () {
             route::get('/subcategory', 'index')->name('subcategory');
             Route::get('/subcategory-create', 'create')->name('subcategory.create');
             route::post('/subcategory-store', 'store')->name('subcategory.store');
@@ -105,7 +112,7 @@ Route::prefix('auth')->group(function () {
             route::put('/subcategory-update/{id}', 'update')->name('subcategory.update');
             route::delete('/subcategory-delete/{id}', 'delete')->name('subcategory.delete');
         });
-        Route::controller(ProductsController::class)->middleware([config('const.auth.high'), config('const.auth.mid')])->group(function () {
+        Route::controller(ProductsController::class)->middleware('checkLogin.role')->group(function () {
             route::get('/products', 'index')->name('products');
             Route::get('/products-create', 'create')->name('products.create');
             route::post('/products-store', 'store')->name('products.store');
@@ -118,7 +125,7 @@ Route::prefix('auth')->group(function () {
             route::get('/product-survive', 'getProductSurvive')->name('products.survive');
             Route::post('/product/search', 'searchProduct')->name('products.search');
         });
-        Route::controller(BlogController::class)->middleware([config('const.auth.high'), config('const.auth.mid')])->group(function () {
+        Route::controller(BlogController::class)->middleware('checkLogin.role')->group(function () {
             route::get('/blog', 'index')->name('blog');
             Route::get('/blog-create', 'create')->name('blog.create');
             route::post('/blog-store', 'store')->name('blog.store');
@@ -126,7 +133,7 @@ Route::prefix('auth')->group(function () {
             route::put('/blog-update/{id}', 'update')->name('blog.update');
             route::delete('/blog-delete/{id}', 'delete')->name('blog.delete');
         });
-        Route::controller(OrderController::class)->middleware([config('const.auth.high'), config('const.auth.mid')])->group(function () {
+        Route::controller(OrderController::class)->middleware('checkLogin.role')->group(function () {
             route::get('order', 'index')->name('order.index');
             route::get('/order-show/{id}', 'show')->name('order.show');
             route::get('order/pdf/{id}', 'pdf')->name('order.pdf');
@@ -135,13 +142,13 @@ Route::prefix('auth')->group(function () {
             route::delete('/order/{id}', 'delete')->name('order.delete');
             route::get('/income', 'incomeChart')->name('product.order.income'); 
         });
-        Route::controller(ProductReviewController::class)->middleware([config('const.auth.high'), config('const.auth.mid')])->group(function () {
+        Route::controller(ProductReviewController::class)->middleware('checkLogin.role')->group(function () {
             route::get('/reviews', 'index')->name('products.review');
             route::get('/review-edit/{id}', 'edit')->name('review.edit');
             route::put('/review-update/{id}', 'update')->name('review.update');
             route::delete('/review-delete{id}', 'delete')->name('review.delete');
         });
-        Route::controller(CouponController::class)->middleware([config('const.auth.high'), config('const.auth.mid')])->group(function () {
+        Route::controller(CouponController::class)->middleware('checkLogin.role')->group(function () {
             route::get('/coupon', 'index')->name('coupon.index');
             route::get('/coupon-create', 'create')->name('coupon.create');
             route::post('/coupon-store', 'store')->name('coupon.store');
@@ -149,13 +156,13 @@ Route::prefix('auth')->group(function () {
             route::put('/coupon-update/{id}', 'update')->name('coupon.update');
             route::delete('/coupon-delete/{id}', 'delete')->name('coupon.delete');
         });
-        Route::controller(CommentController::class)->middleware([config('const.auth.high'), config('const.auth.mid')])->group(function () {
+        Route::controller(CommentController::class)->middleware('checkLogin.role')->group(function () {
             route::get('comment', 'index')->name('comment.index');
             route::get('/comment/{id}', 'edit')->name('comment.edit');
             route::put('/comment-update/{id}', 'update')->name('comment.update');
             route::delete('/comment-delete{id}', 'delete')->name('comment.delete');
         });
-        Route::controller(MessagesController::class)->middleware([config('const.auth.high'), config('const.auth.mid')])->group(function () {
+        Route::controller(MessagesController::class)->middleware('checkLogin.role')->group(function () {
             route::get('/message', 'index')->name('message.index');
             Route::post('/message/search', 'searchUser')->name('message.search');
             Route::get('/message/{id}', 'viewMessage')->name('message.view');
@@ -164,7 +171,7 @@ Route::prefix('auth')->group(function () {
             Route::get('/chat', 'showChat')->name('message.index');
             Route::post('/chat/send', 'sendMessage')->name('message.sendMessage');
         });
-        Route::controller(MessagesKHController::class)->middleware([config('const.auth.high'), config('const.auth.mid')])->group(function () {
+        Route::controller(MessagesKHController::class)->middleware('checkLogin.role')->group(function () {
             // route::get('/messagekh', 'index')->name('messagekh.index');
             // Route::get('/message/view/id', 'viewMessage')->name('message.view');
             // route::post('message', function (Request $request) {
@@ -180,7 +187,7 @@ Route::prefix('auth')->group(function () {
 
         });
     });
-});
+// });
 
 // Route::prefix('auth')->group(function () {
 Route::prefix('user')->group(function () {
@@ -225,33 +232,35 @@ Route::prefix('user')->group(function () {
 
             Route::post('/cart/apply-coupon', 'couponStore')->name('cart.applyCoupon');
             Route::post('/mail/sendcode', 'sendCoupon')->name('mail.sendCoupon');
+
+            route::get('history-order', 'historyOrder')->name('historyOrder');
         });
-        Route::controller(cartController::class)->middleware([config('const.auth.low')])->group(function () {
+        Route::controller(cartController::class)->middleware('user')->group(function () {
             route::get('cart', 'index')->name('cart');
             route::get('/add-to-cart/{id}', 'addToCart')->name('add-to-cart');
             Route::post('cart-update', 'cartUpdate')->name('cart.update');
             Route::get('/cart-delete/{id}', 'cartdelete')->name('cart.delete');
             route::get('checkout', 'checkout')->name('checkout');
         });
-        Route::controller(OrderController::class)->middleware([config('const.auth.low')])->group(function () {
+        Route::controller(OrderController::class)->middleware('user')->group(function () {
             Route::post('cart/order', 'store')->name('cart.order');
             route::post('checkout/momo/', 'momo')->name('user.checkout.momo');
         });
-        Route::controller(ProductReviewController::class)->middleware([config('const.auth.low')])->group(function () {
+        Route::controller(ProductReviewController::class)->middleware('user')->group(function () {
             Route::post('product/{id}/review', 'store')->name('review.store');
         });
-        Route::controller(WishlistController::class)->middleware([config('const.auth.low')])->group(function () {
+        Route::controller(WishlistController::class)->middleware('user')->group(function () {
             route::get('/wishlist', 'index')->name('wishlist');
             route::get('/wishlist/{id}', 'addWishlist')->name('add-to-wishlist');
             route::get('/wishlist-delete/{id}', 'wishlistDelete')->name('wishlist.delete');
         });
-        route::controller(messageController::class)->middleware([config('const.auth.low')])->group(function () {
+        route::controller(messageController::class)->middleware('user')->group(function () {
             route::post('/message', 'store')->name('message');
         });
-        route::controller(CommentController::class)->middleware([config('const.auth.low')])->group(function () {
+        route::controller(CommentController::class)->middleware([config('user')])->group(function () {
             route::post('/comment/{id}', 'store')->name('comment');
         });
-        route::controller(PaymentController::class)->middleware([config('const.auth.low')])->group(function (){
+        route::controller(PaymentController::class)->middleware([config('user')])->group(function (){
             route::get('/payment/checkout', 'getCheckout')->name('payment.checkout');
             Route::post('/paypal/checkout', 'postPayWithPayPal')->name('paypal.checkout');
             Route::get('/paypal/status', 'status')->name('paypal.status');

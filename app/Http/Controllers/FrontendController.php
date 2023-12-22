@@ -306,6 +306,10 @@ class FrontendController extends Controller
         $carts = cart::where('user_id', $user?->id)->get(); // Lấy giỏ hàng của người dùng đăng nhập
         $wishlists = Wishlist::where('user_id', $user?->id)->orderBy('id', 'DESC')->paginate(10); // Lấy danh sách yêu thích của người dùng đăng nhập
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
+        // $category = categories::where('status', 1)
+        //     ->whereNull('deleted_at')
+        //     ->where('name', 'like', '%' . $request->search . '%')
+        //     ->get();
         $recent_products = products::where('status', '1')->where('quantity', '>', 0)->orderBy('id', 'DESC')->whereNull('deleted_at')->limit(3)->get();
         $products = products::where('status', 1)->where('quantity', '>', 0)
             ->where(function ($query) use ($request) {
@@ -482,4 +486,28 @@ class FrontendController extends Controller
 
         return redirect()->back()->with('success', 'Bạn đã đăng ký thành công.');
     }
+
+    public function historyOrder()
+    {
+        // Đảm bảo người dùng đã đăng nhập
+        $user = Auth::user();
+
+        if (!$user) {
+            // Xử lý khi người dùng chưa đăng nhập, ví dụ chuyển hướng đến trang đăng nhập
+            return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để xem lịch sử đơn hàng.');
+        }
+
+        $carts = cart::where('user_id', $user->id)->get();
+        $wishlists = Wishlist::where('user_id', $user->id)->orderBy('id', 'DESC')->paginate(10);
+        $category = categories::where('status', 1)->whereNull('deleted_at')->get();
+
+        // Lấy danh sách đơn hàng của người dùng đăng nhập
+        $orders = Order::where('user_id', $user->id)->orderBy('id', 'DESC')->paginate(10);
+
+        // Kiểm tra trùng lặp email trước khi hiển thị đơn hàng
+        $uniqueEmails = Order::where('user_id', $user->id)->distinct()->pluck('email');
+
+        return view('frontend.pages.history-order', compact('category', 'carts', 'wishlists', 'orders', 'uniqueEmails'))->with('i');
+    }
+
 }
