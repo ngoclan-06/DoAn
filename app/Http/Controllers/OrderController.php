@@ -79,8 +79,8 @@ class OrderController extends Controller
             'date' => now(),
             'fullname' => Auth()->user()->name,
             'email' => Auth()->user()->email_address,
-            'address' => Auth()->user()->address,
-            'phone' => Auth()->user()->phone,
+            'address' => 'Vĩnh Phúc' ?? Auth()->user()->address,
+            'phone' => '0985479172' ?? Auth()->user()->phone,
             'user_id' => Auth()->user()->id,
             'payment_id' => $payment->id,
         ]);

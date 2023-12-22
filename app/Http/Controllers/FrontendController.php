@@ -14,6 +14,7 @@ use App\Models\cart;
 use App\Models\comments;
 use App\Models\order;
 use App\Models\order_detail;
+use App\Models\ProductReview;
 use App\Models\Wishlist;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -144,6 +145,7 @@ class FrontendController extends Controller
         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
         $now = now();
         $productDetail = products::where('id', $id)->first();
+        $reviews = ProductReview::where('products_id', $productDetail->id)->where('status', 'active')->get();
         $subcate = sub_categories::where('status', 1)->where('id', $productDetail->sub_categories_id)->first()->name;
         $relatedProducts = products::where('sub_categories_id', $productDetail->sub_categories_id)
             ->where('id', '!=', $id)->limit(3)->get();

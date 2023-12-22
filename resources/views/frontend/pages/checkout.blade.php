@@ -49,7 +49,7 @@
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>Số điện thoại<span>*</span></label>
-                                    <input type="number" name="phone" placeholder="Enter phone"
+                                    <input type="text" name="phone" placeholder="Enter address"
                                         value="{{ old('phone') }}">
                                     @error('phone')
                                         <span class='text-danger'>{{ $message }}</span>

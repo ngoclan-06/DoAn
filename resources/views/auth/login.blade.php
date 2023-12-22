@@ -136,7 +136,14 @@
     <section>
         <div class="form-box">
             <div class="form-value">
-                
+                <h4>ĐĂNG NHẬP</h4>
+                    @if (isset($errors))
+                    <p style="color:rgb(255, 0, 0); font-size: 8.5px;">
+                        @foreach ($errors->all() as $error)
+                            {!! $error !!}<br/>
+                        @endforeach
+                    </p>
+                @endif
                 <form action="{{ route('login') }}" method="post" enctype="multipart/form-data">
 
                     @if (session('Forbidden'))
@@ -154,7 +161,7 @@
 
                     @csrf
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-                    <h4>ĐĂNG NHẬP</h4>
+            
                     <div class="inputbox">
                         <ion-icon name="mail-outline"></ion-icon>
                         <input type="email" name="email_address" required>
@@ -168,7 +175,7 @@
                     </div>
                     <button class="btn btn-primary" type="submit" name="submit">Login</button>
                     {{-- <button type="submit" class="btn btn-primary" style="margin-top:7px;"> --}}
-                        <a href="{{route('view-register')}}" style="margin-left:127px; color:#fff; margin-top:3px;">Đăng ký</a>
+                        <a  href="{{route('view-register')}}" style="margin-left:125px; color:#fff; margin-top:3px;">Đăng ký</a>
                     {{-- </button> --}}
                     {{-- <a href="{{route('coupon.create')}}" type="submit" class="btn btn-primary">Register</a> --}}
                     {{ csrf_field() }}
@@ -189,13 +196,13 @@
                         </a>
                     @endif
                 </div>
-                @if (isset($errors))
+                {{-- @if (isset($errors))
                     <p style="color:rgb(255, 0, 0); font-size: 8.5px;">
                         @foreach ($errors->all() as $error)
                             {!! $error !!}<br/>
                         @endforeach
                     </p>
-                @endif
+                @endif --}}
                 @if (isset($message))
                     <p style="color:rgb(72, 0, 255);">
                         {{ $message }}

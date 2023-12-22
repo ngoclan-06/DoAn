@@ -250,37 +250,37 @@
                                                                 Comments</span>
                                                         </div>
                                                         @foreach ($productDetail->productReviews as $data)
-                                                            <!-- Single Rating -->
-                                                            <div class="single-rating">
-                                                                <div class="rating-author">
-                                                                    @if ($data->user->image)
-                                                                        <img src="{{ asset('image/user/' . $data->user->image) }}"
-                                                                            alt="{{ $data->image }}">
-                                                                    @else
-                                                                        <img src="{{ asset('backend/img/avatar.png') }}"
-                                                                            alt="Profile.jpg">
-                                                                    @endif
-                                                                </div>
-                                                                <div class="rating-des">
-                                                                    <h6>{{ $data->user->name }}</h6>
-                                                                    <div class="ratings">
-
-                                                                        <ul class="rating">
-                                                                            @for ($i = 1; $i <= 5; $i++)
-                                                                                @if ($data->rate >= $i)
-                                                                                    <li><i class="fa fa-star"></i></li>
-                                                                                @else
-                                                                                    <li><i class="fa fa-star-o"></i></li>
-                                                                                @endif
-                                                                            @endfor
-                                                                        </ul>
-                                                                        <div class="rate-count">
-                                                                            (<span>{{ $data->rate }}</span>)</div>
+                                                            @if ($data->status == 'active')
+                                                                <!-- Single Rating -->
+                                                                <div class="single-rating">
+                                                                    <div class="rating-author">
+                                                                        @if ($data->user->image)
+                                                                            <img src="{{ asset('image/user/' . $data->user->image) }}" alt="{{ $data->image }}">
+                                                                        @else
+                                                                            <img src="{{ asset('backend/img/avatar.png') }}" alt="Profile.jpg">
+                                                                        @endif
                                                                     </div>
-                                                                    <p>{{ $data->review }}</p>
+                                                                    <div class="rating-des">
+                                                                        <h6>{{ $data->user->name }}</h6>
+                                                                        <div class="ratings">
+                                                                            <ul class="rating">
+                                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                                    @if ($data->rate >= $i)
+                                                                                        <li><i class="fa fa-star"></i></li>
+                                                                                    @else
+                                                                                        <li><i class="fa fa-star-o"></i></li>
+                                                                                    @endif
+                                                                                @endfor
+                                                                            </ul>
+                                                                            <div class="rate-count">
+                                                                                (<span>{{ $data->rate }}</span>)
+                                                                            </div>
+                                                                        </div>
+                                                                        <p>{{ $data->review }}</p>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <!--/ End Single Rating -->
+                                                                <!--/ End Single Rating -->
+                                                            @endif
                                                         @endforeach
                                                     </div>
 
@@ -320,7 +320,7 @@
                             <div class="single-product">
                                 <div class="product-img">
                                     <a href="{{ route('product-detail', $data->id) }}">
-                                        <img src="{{ asset('image/product/' . $data->image) }}"
+                                        <img src="{{ asset('image/product/' . $data->image) }}" style="width: 255px; height: 200px"
                                             alt="{{ $data->image }}">
                                     </a>
                                     <div class="button-head">

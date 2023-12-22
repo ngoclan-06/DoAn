@@ -110,7 +110,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <button type="reset" class="btn btn-warning btn-sm">Reset</button>
+                        {{-- <button type="reset" class="btn btn-warning btn-sm">Reset</button> --}}
                         <button type="submit" class="btn btn-success btn-sm">Cập nhật</button>
                     </form>
                 </div>

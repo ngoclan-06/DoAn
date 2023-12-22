@@ -15,7 +15,7 @@ class ProductServices
     public function getAllProducts()
     {
         $now = now();
-        $products = products::orderBy('id', 'DESC')->where('expiry', '>=', $now)->paginate(10);
+        $products = products::orderBy('id', 'DESC')->where('expiry', '>=', $now)->where('quantity','>', '0')->paginate(10);
     //     $products = products::select('name', DB::raw('SUM(quantity) as total_quantity'))
     // ->where('expiry', '>=', $now)
     // ->groupBy('name')
@@ -198,8 +198,17 @@ class ProductServices
 
     public function getProductOutOfStock()
     {
-        $products = products::orderBy('id', 'DESC')->where('quantity', '0')->paginate(10);
-        return $products;
+        $products = products::where('quantity', '0')
+            ->orderBy('id', 'DESC')
+            ->update(['status' => 0]);
+
+        $updatedProducts = products::where('quantity', '0')
+            ->orderBy('id', 'DESC')
+            ->paginate(10);
+
+
+        // $products = products::orderBy('id', 'DESC')->where('quantity', '0')->paginate(10);
+        return $updatedProducts;
     }
 
     public function getProductSurvive()

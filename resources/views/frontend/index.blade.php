@@ -124,7 +124,7 @@
                                                     src="{{ asset('image/product/' . $product->image) }}"
                                                     alt="{{ $product->image }}" style="width: 255px; height: 200px">
                                                 @if ($product->quantity <= 0)
-                                                    <span class="out-of-stock">Sale out</span>
+                                                    <span class="out-of-stock">Hết hàng</span>
                                                 @endif
                                                 </a>
                                                 <div class="button-head">
