@@ -7,10 +7,10 @@
 </head>
 
 <body>
-    <h1>Reset your password</h1>
-    <p>Please click the following link to reset your password:</p>
-    <a href="{{ route('password.reset', $token) }}">Reset Password</a>
-    <p>If you did not request a password reset, you can safely ignore this email.</p>
+    <h1>Đặt lại mật khẩu của bạn</h1>
+    <p>Vui lòng nhấp vào liên kết sau để đặt lại mật khẩu của bạn:</p>
+    <a href="{{ route('password.reset', $token) }}">Đặt lại mật khẩu</a>
+    <p>Nếu bạn không yêu cầu đặt lại mật khẩu, bạn có thể yên tâm bỏ qua email này.</p>
 </body>
 
 </html>

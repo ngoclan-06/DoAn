@@ -51,13 +51,15 @@
                        @endif --}}
                    </td>
                    <td>
-                       {{-- <a href="{{ route('order.show',$order->id) }}" class="btn btn-warning btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="view" data-placement="bottom"><i class="fas fa-eye"></i></a>
-                       <a href="{{ route('order.edit', $order->id) }}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a> --}}
+                    {{-- <a href="{{route('viewOrder',$order->id)}}" 
+                      class="btn" style="width: 9%; height: 50px; color:#fff; margin-top:5px; margin-left:1350px;">CHI TIẾT</a> --}}
+                       <a href="{{ route('viewOrder',$order->id) }}" class="btn btn-warning btn-sm float-left mr-1" style="color:#fff">Chi tiết</a>
+                       {{-- <a href="{{ route('order.edit', $order->id) }}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
                        <form method="POST" action="{{ route('order.delete', $order->id) }}">
                          @csrf 
                          @method('delete')
                              <button onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng không?')" class="btn btn-danger btn-sm dltBtn" data-id={{$order->id}} style="height:30px; width:30px;border-radius:50%" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                       </form>
+                       </form> --}}
                    </td>
                </tr>  
            @endforeach

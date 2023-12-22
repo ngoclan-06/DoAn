@@ -234,6 +234,7 @@ Route::prefix('user')->group(function () {
             Route::post('/mail/sendcode', 'sendCoupon')->name('mail.sendCoupon');
 
             route::get('history-order', 'historyOrder')->name('historyOrder');
+            route::get('/view-order/{id}', 'viewOrder')->name('viewOrder');
         });
         Route::controller(cartController::class)->middleware('user')->group(function () {
             route::get('cart', 'index')->name('cart');

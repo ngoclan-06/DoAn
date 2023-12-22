@@ -510,4 +510,29 @@ class FrontendController extends Controller
         return view('frontend.pages.history-order', compact('category', 'carts', 'wishlists', 'orders', 'uniqueEmails'))->with('i');
     }
 
+    public function viewOrder($id)
+    {
+
+         // Đảm bảo người dùng đã đăng nhập
+         $user = Auth::user();
+
+         if (!$user) {
+             // Xử lý khi người dùng chưa đăng nhập, ví dụ chuyển hướng đến trang đăng nhập
+             return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để xem lịch sử đơn hàng.');
+         }
+ 
+         $carts = cart::where('user_id', $user->id)->get();
+         $wishlists = Wishlist::where('user_id', $user->id)->orderBy('id', 'DESC')->paginate(10);
+         $category = categories::where('status', 1)->whereNull('deleted_at')->get();
+ 
+         // Lấy danh sách đơn hàng của người dùng đăng nhập
+        //  $orders = Order::where('user_id', $user->id)->orderBy('id', 'DESC')->paginate(10);
+ 
+         // Kiểm tra trùng lặp email trước khi hiển thị đơn hàng
+        //  $uniqueEmails = Order::where('user_id', $user->id)->distinct()->pluck('email');
+        $order = order::find($id);
+        $orderDetails = order_detail::where('order_id', $id)->get();
+ 
+         return view('frontend.pages.view-order', compact('category', 'carts', 'wishlists', 'order', 'orderDetails'))->with('i');
+    }
 }
