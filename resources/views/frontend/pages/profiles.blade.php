@@ -46,7 +46,7 @@
                         @method('PUT')
                         <div class="form-group">
                             <label for="inputTitle" class="col-form-label">Tên khách hàng</label>
-                            <input id="inputTitle" type="text" name="name" placeholder="Enter name"
+                            <input id="inputTitle" type="text" name="name" placeholder="Tên khách hàng"
                                 value="{{ $profile->name }}" class="form-control">
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
@@ -55,7 +55,7 @@
 
                         <div class="form-group">
                             <label for="inputEmail" class="col-form-label">Email</label>
-                            <input id="inputEmail" disabled type="email" name="email_address" placeholder="Enter email"
+                            <input id="inputEmail" disabled type="email" name="email_address" placeholder="Email"
                                 value="{{ $profile->email_address }}" class="form-control">
                             @error('email_address')
                                 <span class="text-danger">{{ $message }}</span>
@@ -64,7 +64,7 @@
 
                         <div class="form-group">
                             <label for="inputEmail" class="col-form-label">Số điện thoại</label>
-                            <input id="inputEmail" type="text" name="phone" placeholder="Enter phone"
+                            <input id="inputEmail" type="text" name="phone" placeholder="Số điện thoại"
                                 value="{{ $profile->phone }}" class="form-control">
                             @error('phone')
                                 <span class="text-danger">{{ $message }}</span>
@@ -73,7 +73,7 @@
 
                         <div class="form-group">
                             <label for="inputEmail" class="col-form-label">Địa chỉ</label>
-                            <input id="inputEmail" type="text" name="address" placeholder="Enter email"
+                            <input id="inputEmail" type="text" name="address" placeholder="Địa chỉ"
                                 value="{{ $profile->address }}" class="form-control">
                             @error('address')
                                 <span class="text-danger">{{ $message }}</span>

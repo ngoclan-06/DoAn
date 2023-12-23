@@ -17,7 +17,7 @@
         <table class="table table-bordered" id="order-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr style="text-align: center">
-              <th>STT</th>
+              {{-- <th>STT</th> --}}
               <th>Người đánh giá</th>
               <th>Tên sản phẩm</th>
               <th>Đánh giá</th>
@@ -30,7 +30,7 @@
           <tbody>
             @foreach($reviews as $review)
                 <tr style="text-align: center">
-                    <td>{{ ++$i }}</td>
+                    {{-- <td>{{ ++$i }}</td> --}}
                     <td>{{$review->user?->email_address}}</td>
                     <td>{{$review->products->name}}</td>
                     <td>{{$review->review}}</td>

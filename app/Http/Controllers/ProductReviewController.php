@@ -14,7 +14,8 @@ class ProductReviewController extends Controller
     {
         $reviews = ProductReview::orderBy('id', 'DESC')->paginate(20);
 
-        return view('backend.review.index', compact('reviews'))->with('i');
+        // return view('backend.review.index', compact('reviews'))->with('i');
+        return view('backend.review.index', compact('reviews'));
     }
 
     public function store(Request $request)

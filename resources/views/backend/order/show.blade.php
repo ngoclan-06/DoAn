@@ -20,7 +20,7 @@
                             <th>Địa chỉ</th>
                             <th>Tổng cộng</th>
                             <th>Trạng thái</th>
-                            <th>Lựa chọn</th>
+                            {{-- <th>Lựa chọn</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -42,7 +42,7 @@
                                     <span class="badge badge-danger">{{ $order->status }}</span>
                                 @endif
                             </td>
-                            <td>
+                            {{-- <td>
                                 <a href="{{ route('order.edit', $order->id) }}" class="btn btn-primary btn-sm float-left mr-1"
                                     style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit"
                                     data-placement="bottom"><i class="fas fa-edit"></i></a>
@@ -52,7 +52,7 @@
                                     <button class="btn btn-danger btn-sm dltBtn" data-id={{ $order->id }}
                                         style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip"
                                         data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                                </form>
+                                </form> --}}
                             </td>
 
                         </tr>

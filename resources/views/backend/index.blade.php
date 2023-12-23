@@ -192,7 +192,7 @@
                             <table class="table table-bordered" id="order-dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr style="text-align: center">
-                                        <th>STT</th>
+                                        {{-- <th>STT</th> --}}
                                         <th>Tên bánh</th>
                                         <th>Tỷ lệ</th>
                                         <th>Số lượng</th>
@@ -202,7 +202,7 @@
                                     @foreach ($reviews as $review)
                                         @if ($loop->first || $reviews[$loop->index - 1]->products_id != $review->products_id)
                                             <tr style="text-align: center">
-                                                <td>{{ $review->id }}</td>
+                                                {{-- <td>{{ ++$i }}</td> --}}
                                                 {{-- <td rowspan="{{ $reviewCounts[$review->products_id] }}">{{ $review->products_id }}</td> --}}
                                                 <td rowspan="{{ $reviewCounts[$review->products_id] }}">
                                                     {{ $review->products->name }}</td>

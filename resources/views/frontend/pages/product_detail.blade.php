@@ -160,10 +160,10 @@
                                                     <div class="comment-review">
                                                         <div class="add-review">
                                                             <h5>Thêm đánh giá</h5>
-                                                            <p>Your email address will not be published. Required fields are
-                                                                marked</p>
+                                                            {{-- <p>Your email address will not be published. Required fields are
+                                                                marked</p> --}}
                                                         </div>
-                                                        <h4>Your Rating <span class="text-danger">*</span></h4>
+                                                        <h4>Đánh giá của bạn <span class="text-danger">*</span></h4>
                                                         <div class="review-inner">
                                                             <!-- Form -->
                                                             @auth
@@ -246,8 +246,7 @@
                                                     <div class="ratting-main">
                                                         <div class="avg-ratting">
                                                             <h4><span>(Overall)</span></h4>
-                                                            <span>Based on
-                                                                Comments</span>
+                                                            <span>Đánh giá</span>
                                                         </div>
                                                         @foreach ($productDetail->productReviews as $data)
                                                             @if ($data->status == 'active')
